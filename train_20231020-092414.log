@@ -1,0 +1,1464 @@
+2023-10-20 09:24:14,209   INFO  **********************Start logging**********************
+2023-10-20 09:24:14,209   INFO  CUDA_VISIBLE_DEVICES=ALL
+2023-10-20 09:24:14,209   INFO  Training in distributed mode : total_batch_size: 8
+2023-10-20 09:24:14,209   INFO  cfg_file         cfgs/kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat.yaml
+2023-10-20 09:24:14,209   INFO  batch_size       4
+2023-10-20 09:24:14,209   INFO  epochs           130
+2023-10-20 09:24:14,209   INFO  workers          4
+2023-10-20 09:24:14,209   INFO  extra_tag        default
+2023-10-20 09:24:14,209   INFO  ckpt             None
+2023-10-20 09:24:14,209   INFO  pretrained_model None
+2023-10-20 09:24:14,209   INFO  launcher         pytorch
+2023-10-20 09:24:14,209   INFO  tcp_port         18888
+2023-10-20 09:24:14,209   INFO  sync_bn          False
+2023-10-20 09:24:14,209   INFO  fix_random_seed  False
+2023-10-20 09:24:14,209   INFO  ckpt_save_interval 1
+2023-10-20 09:24:14,209   INFO  local_rank       0
+2023-10-20 09:24:14,209   INFO  max_ckpt_save_num 30
+2023-10-20 09:24:14,209   INFO  merge_all_iters_to_one_epoch False
+2023-10-20 09:24:14,209   INFO  set_cfgs         None
+2023-10-20 09:24:14,209   INFO  max_waiting_mins 0
+2023-10-20 09:24:14,209   INFO  start_epoch      0
+2023-10-20 09:24:14,209   INFO  num_epochs_to_eval 0
+2023-10-20 09:24:14,209   INFO  save_to_file     False
+2023-10-20 09:24:14,209   INFO  use_tqdm_to_record False
+2023-10-20 09:24:14,209   INFO  logger_iter_interval 50
+2023-10-20 09:24:14,209   INFO  ckpt_save_time_interval 300
+2023-10-20 09:24:14,209   INFO  wo_gpu_stat      False
+2023-10-20 09:24:14,209   INFO  use_amp          False
+2023-10-20 09:24:14,209   INFO  cfg.ROOT_DIR: /home/kemove/tem/OpenPCDet-master
+2023-10-20 09:24:14,209   INFO  cfg.LOCAL_RANK: 0
+2023-10-20 09:24:14,209   INFO  cfg.CLASS_NAMES: ['Car']
+2023-10-20 09:24:14,209   INFO  ----------- DATA_CONFIG -----------
+2023-10-20 09:24:14,209   INFO  cfg.DATA_CONFIG.DATASET: KittiDataset
+2023-10-20 09:24:14,209   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/kitti
+2023-10-20 09:24:14,209   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [0, -39.68, -3, 69.12, 39.68, 1]
+2023-10-20 09:24:14,210   INFO  ----------- DATA_SPLIT -----------
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2023-10-20 09:24:14,210   INFO  ----------- INFO_PATH -----------
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['kitti_infos_train.pkl']
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['kitti_infos_val.pkl']
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.GET_ITEM_LIST: ['points']
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.FOV_POINTS_ONLY: True
+2023-10-20 09:24:14,210   INFO  ----------- DATA_AUGMENTOR -----------
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': True, 'DB_INFO_PATH': ['kitti_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5'], 'filter_by_difficulty': [-1]}, 'SAMPLE_GROUPS': ['Car:15', 'Pedestrian:15', 'Cyclist:15'], 'NUM_POINT_FEATURES': 4, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': False}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2023-10-20 09:24:14,210   INFO  ----------- POINT_FEATURE_ENCODING -----------
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.16, 0.16, 4], 'MAX_POINTS_PER_VOXEL': 32, 'MAX_NUMBER_OF_VOXELS': {'train': 16000, 'test': 40000}}]
+2023-10-20 09:24:14,210   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/kitti_dataset.yaml
+2023-10-20 09:24:14,210   INFO  ----------- MODEL -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.NAME: PointPillar
+2023-10-20 09:24:14,210   INFO  ----------- VFE -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.VFE.USE_NORM: True
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64]
+2023-10-20 09:24:14,210   INFO  ----------- MAP_TO_BEV -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2023-10-20 09:24:14,210   INFO  ----------- BACKBONE_2D -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.BACKBONE_2D.NAME: MobileNetV3_Backbone_onecat_3swin_3cat
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [2, 2, 2]
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2, 4]
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2023-10-20 09:24:14,210   INFO  ----------- DENSE_HEAD -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadRDIoU
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Car', 'anchor_sizes': [[3.9, 1.6, 1.56]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.78], 'align_center': False, 'feature_map_stride': 2, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}]
+2023-10-20 09:24:14,210   INFO  ----------- TARGET_ASSIGNER_CONFIG -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2023-10-20 09:24:14,210   INFO  ----------- LOSS_CONFIG -----------
+2023-10-20 09:24:14,210   INFO  ----------- LOSS_WEIGHTS -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2023-10-20 09:24:14,210   INFO  ----------- POST_PROCESSING -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.4
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2023-10-20 09:24:14,210   INFO  ----------- NMS_CONFIG -----------
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.01
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2023-10-20 09:24:14,210   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2023-10-20 09:24:14,210   INFO  ----------- OPTIMIZATION -----------
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 100
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.LR: 0.003
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2023-10-20 09:24:14,210   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2023-10-20 09:24:14,211   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2023-10-20 09:24:14,211   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2023-10-20 09:24:14,211   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2023-10-20 09:24:14,211   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2023-10-20 09:24:14,211   INFO  cfg.TAG: pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat
+2023-10-20 09:24:14,211   INFO  cfg.EXP_GROUP_PATH: kitti_models
+2023-10-20 09:24:14,218   INFO  ----------- Create dataloader & network & optimizer -----------
+2023-10-20 09:24:14,274   INFO  Database filter by min points Car: 14357 => 13532
+2023-10-20 09:24:14,283   INFO  Database filter by difficulty Car: 13532 => 10759
+2023-10-20 09:24:14,287   INFO  Loading KITTI dataset
+2023-10-20 09:24:14,331   INFO  Total samples for KITTI dataset: 3712
+2023-10-20 09:24:16,431   INFO  ==> Loading parameters from checkpoint /home/kemove/tem/OpenPCDet-master/output/kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat/default/ckpt/checkpoint_epoch_100.pth to CPU
+2023-10-20 09:24:16,483   INFO  ==> Loading optimizer parameters from checkpoint /home/kemove/tem/OpenPCDet-master/output/kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat/default/ckpt/checkpoint_epoch_100.pth to CPU
+2023-10-20 09:24:16,518   INFO  ==> Done
+2023-10-20 09:24:17,708   INFO  ----------- Model PointPillar created, param count: 7767300 -----------
+2023-10-20 09:24:17,708   INFO  DistributedDataParallel(
+  (module): PointPillar(
+    (vfe): PillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayer(
+          (linear): Linear(in_features=10, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): MobileNetV3_Backbone_onecat_3swin_3cat(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Block(
+            (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128, bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (5): Block(
+            (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128, bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (6): Block(
+            (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128, bias=False)
+            (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Block(
+            (conv1): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256, bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (5): Block(
+            (conv1): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256, bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (6): Block(
+            (conv1): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256, bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (7): Block(
+            (conv1): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256, bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (8): Block(
+            (conv1): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256, bias=False)
+            (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Block(
+            (conv1): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=512, bias=False)
+            (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (5): Block(
+            (conv1): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=512, bias=False)
+            (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (6): Block(
+            (conv1): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=512, bias=False)
+            (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (7): Block(
+            (conv1): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=512, bias=False)
+            (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+          (8): Block(
+            (conv1): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act1): ReLU(inplace=True)
+            (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=512, bias=False)
+            (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act2): ReLU(inplace=True)
+            (se): SeModule(
+              (se): Sequential(
+                (0): AdaptiveAvgPool2d(output_size=1)
+                (1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                (3): ReLU(inplace=True)
+                (4): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (5): Hardsigmoid()
+              )
+            )
+            (conv3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (act3): ReLU(inplace=True)
+          )
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+      (transformer): ModuleList(
+        (0): SwinTransformer(
+          (layers): ModuleList(
+            (0): BasicLayer(
+              (blocks): ModuleList(
+                (0): SwinTransformerBlock(
+                  (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=64, out_features=192, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=64, out_features=64, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): Identity()
+                  (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=64, out_features=256, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=256, out_features=64, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (1): SwinTransformerBlock(
+                  (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=64, out_features=192, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=64, out_features=64, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.067)
+                  (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=64, out_features=256, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=256, out_features=64, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (2): SwinTransformerBlock(
+                  (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=64, out_features=192, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=64, out_features=64, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.133)
+                  (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=64, out_features=256, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=256, out_features=64, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (3): SwinTransformerBlock(
+                  (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=64, out_features=192, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=64, out_features=64, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.200)
+                  (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=64, out_features=256, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=256, out_features=64, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+              )
+            )
+          )
+          (norm0): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+        )
+        (1): SwinTransformer(
+          (layers): ModuleList(
+            (0): BasicLayer(
+              (blocks): ModuleList(
+                (0): SwinTransformerBlock(
+                  (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=128, out_features=384, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=128, out_features=128, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): Identity()
+                  (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=128, out_features=512, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=512, out_features=128, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (1): SwinTransformerBlock(
+                  (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=128, out_features=384, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=128, out_features=128, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.067)
+                  (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=128, out_features=512, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=512, out_features=128, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (2): SwinTransformerBlock(
+                  (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=128, out_features=384, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=128, out_features=128, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.133)
+                  (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=128, out_features=512, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=512, out_features=128, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (3): SwinTransformerBlock(
+                  (norm1): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=128, out_features=384, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=128, out_features=128, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.200)
+                  (norm2): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=128, out_features=512, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=512, out_features=128, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+              )
+            )
+          )
+          (norm0): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+        )
+        (2): SwinTransformer(
+          (layers): ModuleList(
+            (0): BasicLayer(
+              (blocks): ModuleList(
+                (0): SwinTransformerBlock(
+                  (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=256, out_features=768, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=256, out_features=256, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): Identity()
+                  (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=256, out_features=1024, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=1024, out_features=256, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (1): SwinTransformerBlock(
+                  (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=256, out_features=768, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=256, out_features=256, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.067)
+                  (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=256, out_features=1024, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=1024, out_features=256, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (2): SwinTransformerBlock(
+                  (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=256, out_features=768, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=256, out_features=256, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.133)
+                  (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=256, out_features=1024, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=1024, out_features=256, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+                (3): SwinTransformerBlock(
+                  (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (attn): WindowAttention(
+                    (qkv): Linear(in_features=256, out_features=768, bias=True)
+                    (attn_drop): Dropout(p=0.0, inplace=False)
+                    (proj): Linear(in_features=256, out_features=256, bias=True)
+                    (proj_drop): Dropout(p=0.0, inplace=False)
+                    (softmax): Softmax(dim=-1)
+                  )
+                  (drop_path): DropPath(drop_prob=0.200)
+                  (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+                  (mlp): Mlp(
+                    (fc1): Linear(in_features=256, out_features=1024, bias=True)
+                    (act): GELU()
+                    (fc2): Linear(in_features=1024, out_features=256, bias=True)
+                    (drop): Dropout(p=0.0, inplace=False)
+                  )
+                )
+              )
+            )
+          )
+          (norm0): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+        )
+      )
+    )
+    (dense_head): AnchorHeadRDIoU(
+      (cls_loss_func): SigmoidQualityFocalClassificationLoss()
+      (dir_loss_func): WeightedCrossEntropyLoss()
+      (conv_cls): Conv2d(384, 2, kernel_size=(1, 1), stride=(1, 1))
+      (conv_box): Conv2d(384, 14, kernel_size=(1, 1), stride=(1, 1))
+      (conv_dir_cls): Conv2d(384, 4, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2023-10-20 09:24:17,713   INFO  **********************Start training kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat(default)**********************
+2023-10-20 09:24:30,837   INFO  Train:  101/130 ( 78%) [   0/464 (  0%)]  Loss: 0.5030 (0.503)  LR: 9.681e-04  Time cost: 00:00/05:07 [00:13/2:33:34]  Acc_iter 46401       Data time: 0.11(0.11)  Forward time: 0.57(0.57)  Batch time: 0.68(0.68)
+2023-10-20 09:24:55,192   INFO  Train:  101/130 ( 78%) [  49/464 ( 11%)]  Loss: 0.4905 (0.502)  LR: 9.622e-04  Time cost: 00:25/03:27 [00:37/1:55:40]  Acc_iter 46450       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 09:25:20,054   INFO  Train:  101/130 ( 78%) [  99/464 ( 21%)]  Loss: 0.5658 (0.513)  LR: 9.561e-04  Time cost: 00:49/03:02 [01:02/1:54:53]  Acc_iter 46500       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 09:25:20,414   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:25:20 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 56°C,  99 % | 18408 / 24576 MB | kemove(18162M) root(168M)
+[1] NVIDIA GeForce RTX 3090 | 53°C,  99 % | 18527 / 24576 MB | kemove(18510M) root(4M)
+
+2023-10-20 09:25:45,344   INFO  Train:  101/130 ( 78%) [ 149/464 ( 32%)]  Loss: 0.5443 (0.516)  LR: 9.500e-04  Time cost: 01:15/02:37 [01:27/1:55:00]  Acc_iter 46550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:26:10,278   INFO  Train:  101/130 ( 78%) [ 199/464 ( 43%)]  Loss: 0.4534 (0.519)  LR: 9.440e-04  Time cost: 01:40/02:12 [01:52/1:54:27]  Acc_iter 46600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:26:35,193   INFO  Train:  101/130 ( 78%) [ 249/464 ( 54%)]  Loss: 0.4588 (0.520)  LR: 9.379e-04  Time cost: 02:05/01:47 [02:17/1:53:56]  Acc_iter 46650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:26:35,556   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:26:35 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 62°C,  81 % | 18716 / 24576 MB | kemove(18480M) root(157M)
+[1] NVIDIA GeForce RTX 3090 | 58°C, 100 % | 18527 / 24576 MB | kemove(18510M) root(4M)
+
+2023-10-20 09:27:00,478   INFO  Train:  101/130 ( 78%) [ 299/464 ( 64%)]  Loss: 0.5049 (0.520)  LR: 9.319e-04  Time cost: 02:30/01:22 [02:42/1:53:44]  Acc_iter 46700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:27:25,370   INFO  Train:  101/130 ( 78%) [ 349/464 ( 75%)]  Loss: 0.5761 (0.521)  LR: 9.259e-04  Time cost: 02:55/00:57 [03:07/1:53:13]  Acc_iter 46750       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 09:27:50,327   INFO  Train:  101/130 ( 78%) [ 399/464 ( 86%)]  Loss: 0.5741 (0.523)  LR: 9.199e-04  Time cost: 03:20/00:32 [03:32/1:52:45]  Acc_iter 46800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:27:50,691   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:27:50 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C,  61 % | 18716 / 24576 MB | kemove(18480M) root(157M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18527 / 24576 MB | kemove(18510M) root(4M)
+
+2023-10-20 09:28:15,597   INFO  Train:  101/130 ( 78%) [ 449/464 ( 97%)]  Loss: 0.5038 (0.522)  LR: 9.139e-04  Time cost: 03:45/00:07 [03:57/1:52:28]  Acc_iter 46850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:28:22,565   INFO  Train:  101/130 ( 78%) [ 463/464 (100%)]  Loss: 0.5467 (0.522)  LR: 9.122e-04  Time cost: 03:52/00:00 [04:04/1:52:19]  Acc_iter 46864       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:28:29,879   INFO  Train:  102/130 ( 78%) [   0/464 (  0%)]  Loss: 0.5201 (0.520)  LR: 9.121e-04  Time cost: 00:00/05:06 [04:12/2:28:21]  Acc_iter 46865       Data time: 0.14(0.14)  Forward time: 0.52(0.52)  Batch time: 0.66(0.66)
+2023-10-20 09:28:47,319   INFO  Train:  102/130 ( 78%) [  35/464 (  8%)]  Loss: 0.5009 (0.528)  LR: 9.079e-04  Time cost: 00:18/03:35 [04:29/1:52:28]  Acc_iter 46900       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:29:12,285   INFO  Train:  102/130 ( 78%) [  85/464 ( 18%)]  Loss: 0.5246 (0.527)  LR: 9.019e-04  Time cost: 00:43/03:09 [04:54/1:51:35]  Acc_iter 46950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:29:12,649   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:29:12 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  56 % | 18763 / 24576 MB | kemove(18480M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  98 % | 18527 / 24576 MB | kemove(18510M) root(4M)
+
+2023-10-20 09:29:37,791   INFO  Train:  102/130 ( 78%) [ 135/464 ( 29%)]  Loss: 0.5523 (0.522)  LR: 8.959e-04  Time cost: 01:08/02:45 [05:20/1:51:56]  Acc_iter 47000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:30:02,788   INFO  Train:  102/130 ( 78%) [ 185/464 ( 40%)]  Loss: 0.4232 (0.519)  LR: 8.900e-04  Time cost: 01:33/02:20 [05:45/1:51:16]  Acc_iter 47050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:30:27,771   INFO  Train:  102/130 ( 78%) [ 235/464 ( 51%)]  Loss: 0.5893 (0.520)  LR: 8.840e-04  Time cost: 01:58/01:55 [06:10/1:50:41]  Acc_iter 47100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:30:28,135   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:30:28 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 18794 / 24576 MB | kemove(18480M) root(179M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18527 / 24576 MB | kemove(18510M) root(4M)
+
+2023-10-20 09:30:53,601   INFO  Train:  102/130 ( 78%) [ 285/464 ( 61%)]  Loss: 0.4718 (0.521)  LR: 8.781e-04  Time cost: 02:24/01:30 [06:35/1:50:49]  Acc_iter 47150       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:31:18,498   INFO  Train:  102/130 ( 78%) [ 335/464 ( 72%)]  Loss: 0.4683 (0.519)  LR: 8.722e-04  Time cost: 02:49/01:04 [07:00/1:50:10]  Acc_iter 47200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:31:43,454   INFO  Train:  102/130 ( 78%) [ 385/464 ( 83%)]  Loss: 0.5919 (0.521)  LR: 8.663e-04  Time cost: 03:14/00:39 [07:25/1:49:37]  Acc_iter 47250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:31:43,817   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:31:43 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  66 % | 18796 / 24576 MB | kemove(18480M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:32:08,942   INFO  Train:  102/130 ( 78%) [ 435/464 ( 94%)]  Loss: 0.5676 (0.520)  LR: 8.604e-04  Time cost: 03:39/00:14 [07:51/1:49:21]  Acc_iter 47300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:32:22,908   INFO  Train:  102/130 ( 78%) [ 463/464 (100%)]  Loss: 0.4576 (0.520)  LR: 8.571e-04  Time cost: 03:53/00:00 [08:05/1:49:03]  Acc_iter 47328       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:32:30,854   INFO  Train:  103/130 ( 79%) [   0/464 (  0%)]  Loss: 0.5370 (0.537)  LR: 8.570e-04  Time cost: 00:00/05:03 [08:13/2:21:28]  Acc_iter 47329       Data time: 0.11(0.11)  Forward time: 0.53(0.53)  Batch time: 0.64(0.64)
+2023-10-20 09:32:41,304   INFO  Train:  103/130 ( 79%) [  21/464 (  5%)]  Loss: 0.4794 (0.517)  LR: 8.545e-04  Time cost: 00:11/03:43 [08:23/1:49:06]  Acc_iter 47350       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:33:06,304   INFO  Train:  103/130 ( 79%) [  71/464 ( 15%)]  Loss: 0.5296 (0.517)  LR: 8.486e-04  Time cost: 00:36/03:17 [08:48/1:47:59]  Acc_iter 47400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:33:06,670   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:33:06 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 18813 / 24576 MB | kemove(18480M) root(197M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:33:31,638   INFO  Train:  103/130 ( 79%) [ 121/464 ( 26%)]  Loss: 0.5115 (0.518)  LR: 8.428e-04  Time cost: 01:01/02:52 [09:13/1:48:01]  Acc_iter 47450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:33:57,702   INFO  Train:  103/130 ( 79%) [ 171/464 ( 37%)]  Loss: 0.5480 (0.518)  LR: 8.369e-04  Time cost: 01:27/02:29 [09:39/1:48:42]  Acc_iter 47500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:34:23,248   INFO  Train:  103/130 ( 79%) [ 221/464 ( 48%)]  Loss: 0.4617 (0.518)  LR: 8.311e-04  Time cost: 01:53/02:03 [10:05/1:48:23]  Acc_iter 47550       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.51)
+2023-10-20 09:34:23,615   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:34:23 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  90 % | 18793 / 24576 MB | kemove(18480M) root(177M)
+[1] NVIDIA GeForce RTX 3090 | 58°C, 100 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:34:50,322   INFO  Train:  103/130 ( 79%) [ 271/464 ( 58%)]  Loss: 0.4844 (0.518)  LR: 8.253e-04  Time cost: 02:20/01:39 [10:32/1:49:13]  Acc_iter 47600       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:35:17,063   INFO  Train:  103/130 ( 79%) [ 321/464 ( 69%)]  Loss: 0.4858 (0.519)  LR: 8.195e-04  Time cost: 02:46/01:14 [10:59/1:49:26]  Acc_iter 47650       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:35:42,349   INFO  Train:  103/130 ( 79%) [ 371/464 ( 80%)]  Loss: 0.5098 (0.519)  LR: 8.137e-04  Time cost: 03:12/00:48 [11:24/1:48:39]  Acc_iter 47700       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:35:42,722   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:35:42 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  87 % | 18803 / 24576 MB | kemove(18480M) root(187M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  98 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:36:07,667   INFO  Train:  103/130 ( 79%) [ 421/464 ( 91%)]  Loss: 0.5245 (0.519)  LR: 8.079e-04  Time cost: 03:37/00:22 [11:49/1:47:58]  Acc_iter 47750       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.51(0.52)
+2023-10-20 09:36:28,626   INFO  Train:  103/130 ( 79%) [ 463/464 (100%)]  Loss: 0.5075 (0.519)  LR: 8.031e-04  Time cost: 03:58/00:00 [12:10/1:47:18]  Acc_iter 47792       Data time: 0.00(0.00)  Forward time: 0.49(0.51)  Batch time: 0.49(0.51)
+2023-10-20 09:36:35,991   INFO  Train:  104/130 ( 80%) [   0/464 (  0%)]  Loss: 0.4792 (0.479)  LR: 8.029e-04  Time cost: 00:00/04:43 [12:18/2:07:40]  Acc_iter 47793       Data time: 0.11(0.11)  Forward time: 0.55(0.55)  Batch time: 0.66(0.66)
+2023-10-20 09:36:39,491   INFO  Train:  104/130 ( 80%) [   7/464 (  2%)]  Loss: 0.4862 (0.506)  LR: 8.021e-04  Time cost: 00:04/03:54 [12:21/1:47:13]  Acc_iter 47800       Data time: 0.00(0.02)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:37:04,468   INFO  Train:  104/130 ( 80%) [  57/464 ( 12%)]  Loss: 0.5285 (0.523)  LR: 7.964e-04  Time cost: 00:29/03:24 [12:46/1:44:14]  Acc_iter 47850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:37:04,852   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:37:04 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C,  28 % | 18940 / 24576 MB | kemove(18480M) root(197M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:37:29,819   INFO  Train:  104/130 ( 80%) [ 107/464 ( 23%)]  Loss: 0.5198 (0.518)  LR: 7.906e-04  Time cost: 00:54/02:59 [13:12/1:44:20]  Acc_iter 47900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:37:54,724   INFO  Train:  104/130 ( 80%) [ 157/464 ( 34%)]  Loss: 0.5228 (0.517)  LR: 7.849e-04  Time cost: 01:19/02:34 [13:37/1:43:32]  Acc_iter 47950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:38:19,715   INFO  Train:  104/130 ( 80%) [ 207/464 ( 45%)]  Loss: 0.4764 (0.517)  LR: 7.792e-04  Time cost: 01:44/02:08 [14:02/1:43:00]  Acc_iter 48000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:38:20,081   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:38:20 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  64 % | 18914 / 24576 MB | kemove(18480M) root(197M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:38:45,045   INFO  Train:  104/130 ( 80%) [ 257/464 ( 55%)]  Loss: 0.5653 (0.517)  LR: 7.735e-04  Time cost: 02:09/01:44 [14:27/1:42:47]  Acc_iter 48050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:39:09,984   INFO  Train:  104/130 ( 80%) [ 307/464 ( 66%)]  Loss: 0.5533 (0.520)  LR: 7.678e-04  Time cost: 02:34/01:18 [14:52/1:42:14]  Acc_iter 48100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:39:34,922   INFO  Train:  104/130 ( 80%) [ 357/464 ( 77%)]  Loss: 0.6156 (0.521)  LR: 7.621e-04  Time cost: 02:59/00:53 [15:17/1:41:43]  Acc_iter 48150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:39:35,290   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:39:35 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  80 % | 18914 / 24576 MB | kemove(18480M) root(197M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18531 / 24576 MB | kemove(18514M) root(4M)
+
+2023-10-20 09:40:00,241   INFO  Train:  104/130 ( 80%) [ 407/464 ( 88%)]  Loss: 0.5028 (0.522)  LR: 7.565e-04  Time cost: 03:24/00:28 [15:42/1:41:26]  Acc_iter 48200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:40:25,168   INFO  Train:  104/130 ( 80%) [ 457/464 ( 98%)]  Loss: 0.5743 (0.521)  LR: 7.508e-04  Time cost: 03:49/00:03 [16:07/1:40:56]  Acc_iter 48250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:40:28,141   INFO  Train:  104/130 ( 80%) [ 463/464 (100%)]  Loss: 0.6258 (0.522)  LR: 7.501e-04  Time cost: 03:52/00:00 [16:10/1:40:52]  Acc_iter 48256       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:40:35,436   INFO  Train:  105/130 ( 81%) [   0/464 (  0%)]  Loss: 0.5152 (0.515)  LR: 7.500e-04  Time cost: 00:00/04:57 [16:17/2:08:47]  Acc_iter 48257       Data time: 0.11(0.11)  Forward time: 0.54(0.54)  Batch time: 0.65(0.65)
+2023-10-20 09:40:56,989   INFO  Train:  105/130 ( 81%) [  43/464 (  9%)]  Loss: 0.5243 (0.510)  LR: 7.452e-04  Time cost: 00:22/03:32 [16:39/1:41:03]  Acc_iter 48300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:40:57,373   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:40:57 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C,  28 % | 18908 / 24576 MB | kemove(18484M) root(187M)
+[1] NVIDIA GeForce RTX 3090 | 57°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:41:22,767   INFO  Train:  105/130 ( 81%) [  93/464 ( 20%)]  Loss: 0.5513 (0.514)  LR: 7.396e-04  Time cost: 00:47/03:09 [17:05/1:41:49]  Acc_iter 48350       Data time: 0.00(0.01)  Forward time: 0.50(0.51)  Batch time: 0.50(0.51)
+2023-10-20 09:41:47,925   INFO  Train:  105/130 ( 81%) [ 143/464 ( 31%)]  Loss: 0.5735 (0.515)  LR: 7.340e-04  Time cost: 01:13/02:43 [17:30/1:40:53]  Acc_iter 48400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:42:14,987   INFO  Train:  105/130 ( 81%) [ 193/464 ( 42%)]  Loss: 0.4781 (0.518)  LR: 7.284e-04  Time cost: 01:40/02:19 [17:57/1:42:10]  Acc_iter 48450       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:42:15,353   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:42:15 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  40 % | 18902 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:42:40,965   INFO  Train:  105/130 ( 81%) [ 243/464 ( 52%)]  Loss: 0.4489 (0.517)  LR: 7.228e-04  Time cost: 02:06/01:54 [18:23/1:41:52]  Acc_iter 48500       Data time: 0.00(0.00)  Forward time: 0.54(0.51)  Batch time: 0.55(0.52)
+2023-10-20 09:43:06,655   INFO  Train:  105/130 ( 81%) [ 293/464 ( 63%)]  Loss: 0.4768 (0.517)  LR: 7.172e-04  Time cost: 02:31/01:28 [18:48/1:41:20]  Acc_iter 48550       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:43:31,815   INFO  Train:  105/130 ( 81%) [ 343/464 ( 74%)]  Loss: 0.5074 (0.516)  LR: 7.117e-04  Time cost: 02:57/01:02 [19:14/1:40:31]  Acc_iter 48600       Data time: 0.00(0.00)  Forward time: 0.59(0.51)  Batch time: 0.60(0.51)
+2023-10-20 09:43:32,183   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:43:32 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  67 % | 18892 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:43:59,666   INFO  Train:  105/130 ( 81%) [ 393/464 ( 85%)]  Loss: 0.5203 (0.517)  LR: 7.062e-04  Time cost: 03:24/00:36 [19:41/1:41:08]  Acc_iter 48650       Data time: 0.00(0.00)  Forward time: 0.49(0.52)  Batch time: 0.49(0.52)
+2023-10-20 09:44:25,426   INFO  Train:  105/130 ( 81%) [ 443/464 ( 95%)]  Loss: 0.4712 (0.516)  LR: 7.006e-04  Time cost: 03:50/00:10 [20:07/1:40:36]  Acc_iter 48700       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:44:35,388   INFO  Train:  105/130 ( 81%) [ 463/464 (100%)]  Loss: 0.4838 (0.516)  LR: 6.984e-04  Time cost: 04:00/00:00 [20:17/1:40:15]  Acc_iter 48720       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.52)
+2023-10-20 09:44:42,745   INFO  Train:  106/130 ( 82%) [   0/464 (  0%)]  Loss: 0.5628 (0.563)  LR: 6.983e-04  Time cost: 00:00/04:47 [20:25/1:59:39]  Acc_iter 48721       Data time: 0.11(0.11)  Forward time: 0.54(0.54)  Batch time: 0.65(0.65)
+2023-10-20 09:44:57,207   INFO  Train:  106/130 ( 82%) [  29/464 (  6%)]  Loss: 0.5005 (0.512)  LR: 6.951e-04  Time cost: 00:15/03:38 [20:39/1:36:56]  Acc_iter 48750       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:44:57,575   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:44:57 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 63°C,  77 % | 18892 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 57°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:45:22,938   INFO  Train:  106/130 ( 82%) [  79/464 ( 17%)]  Loss: 0.4925 (0.515)  LR: 6.896e-04  Time cost: 00:40/03:16 [21:05/1:37:57]  Acc_iter 48800       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:45:47,998   INFO  Train:  106/130 ( 82%) [ 129/464 ( 28%)]  Loss: 0.5323 (0.513)  LR: 6.842e-04  Time cost: 01:05/02:49 [21:30/1:36:52]  Acc_iter 48850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:46:12,967   INFO  Train:  106/130 ( 82%) [ 179/464 ( 39%)]  Loss: 0.5411 (0.513)  LR: 6.787e-04  Time cost: 01:30/02:23 [21:55/1:36:03]  Acc_iter 48900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:46:13,334   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:46:13 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  70 % | 18874 / 24576 MB | kemove(18484M) root(191M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:46:38,294   INFO  Train:  106/130 ( 82%) [ 229/464 ( 49%)]  Loss: 0.4911 (0.512)  LR: 6.733e-04  Time cost: 01:56/01:58 [22:20/1:35:43]  Acc_iter 48950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:47:03,270   INFO  Train:  106/130 ( 82%) [ 279/464 ( 60%)]  Loss: 0.3848 (0.512)  LR: 6.679e-04  Time cost: 02:21/01:33 [22:45/1:35:06]  Acc_iter 49000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:47:28,264   INFO  Train:  106/130 ( 82%) [ 329/464 ( 71%)]  Loss: 0.4733 (0.512)  LR: 6.625e-04  Time cost: 02:46/01:07 [23:10/1:34:34]  Acc_iter 49050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:47:28,643   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:47:28 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  29 % | 18874 / 24576 MB | kemove(18484M) root(191M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:47:53,824   INFO  Train:  106/130 ( 82%) [ 379/464 ( 82%)]  Loss: 0.5231 (0.511)  LR: 6.571e-04  Time cost: 03:11/00:42 [23:36/1:34:20]  Acc_iter 49100       Data time: 0.04(0.00)  Forward time: 0.53(0.50)  Batch time: 0.57(0.50)
+2023-10-20 09:48:20,411   INFO  Train:  106/130 ( 82%) [ 429/464 ( 92%)]  Loss: 0.5748 (0.513)  LR: 6.517e-04  Time cost: 03:38/00:17 [24:02/1:34:30]  Acc_iter 49150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.51)
+2023-10-20 09:48:37,379   INFO  Train:  106/130 ( 82%) [ 463/464 (100%)]  Loss: 0.4720 (0.512)  LR: 6.480e-04  Time cost: 03:55/00:00 [24:19/1:34:06]  Acc_iter 49184       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:48:44,736   INFO  Train:  107/130 ( 82%) [   0/464 (  0%)]  Loss: 0.5616 (0.562)  LR: 6.479e-04  Time cost: 00:00/05:14 [24:27/2:05:46]  Acc_iter 49185       Data time: 0.15(0.15)  Forward time: 0.53(0.53)  Batch time: 0.68(0.68)
+2023-10-20 09:48:52,218   INFO  Train:  107/130 ( 82%) [  15/464 (  3%)]  Loss: 0.5959 (0.537)  LR: 6.463e-04  Time cost: 00:08/03:48 [24:34/1:34:31]  Acc_iter 49200       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:48:52,586   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:48:52 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 62°C, 100 % | 18865 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 56°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:49:17,500   INFO  Train:  107/130 ( 82%) [  65/464 ( 14%)]  Loss: 0.5784 (0.517)  LR: 6.410e-04  Time cost: 00:33/03:22 [24:59/1:33:29]  Acc_iter 49250       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:49:42,481   INFO  Train:  107/130 ( 82%) [ 115/464 ( 25%)]  Loss: 0.4962 (0.517)  LR: 6.356e-04  Time cost: 00:58/02:55 [25:24/1:32:30]  Acc_iter 49300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:50:07,456   INFO  Train:  107/130 ( 82%) [ 165/464 ( 36%)]  Loss: 0.5179 (0.519)  LR: 6.303e-04  Time cost: 01:23/02:30 [25:49/1:31:51]  Acc_iter 49350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:50:07,822   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:50:07 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  53 % | 18776 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:50:32,779   INFO  Train:  107/130 ( 82%) [ 215/464 ( 46%)]  Loss: 0.5054 (0.519)  LR: 6.250e-04  Time cost: 01:48/02:05 [26:15/1:31:36]  Acc_iter 49400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:50:57,729   INFO  Train:  107/130 ( 82%) [ 265/464 ( 57%)]  Loss: 0.4930 (0.518)  LR: 6.198e-04  Time cost: 02:13/01:40 [26:40/1:31:02]  Acc_iter 49450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:51:24,115   INFO  Train:  107/130 ( 82%) [ 315/464 ( 68%)]  Loss: 0.5191 (0.517)  LR: 6.145e-04  Time cost: 02:40/01:15 [27:06/1:31:20]  Acc_iter 49500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:51:24,484   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:51:24 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  95 % | 18776 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:51:49,775   INFO  Train:  107/130 ( 82%) [ 365/464 ( 79%)]  Loss: 0.4987 (0.516)  LR: 6.092e-04  Time cost: 03:05/00:50 [27:32/1:31:05]  Acc_iter 49550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:52:14,726   INFO  Train:  107/130 ( 82%) [ 415/464 ( 89%)]  Loss: 0.4895 (0.515)  LR: 6.040e-04  Time cost: 03:30/00:24 [27:57/1:30:29]  Acc_iter 49600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:52:38,672   INFO  Train:  107/130 ( 82%) [ 463/464 (100%)]  Loss: 0.4843 (0.514)  LR: 5.990e-04  Time cost: 03:54/00:00 [28:20/1:29:56]  Acc_iter 49648       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.51)
+2023-10-20 09:52:45,992   INFO  Train:  108/130 ( 83%) [   0/464 (  0%)]  Loss: 0.5060 (0.506)  LR: 5.989e-04  Time cost: 00:00/04:33 [28:28/1:44:52]  Acc_iter 49649       Data time: 0.08(0.08)  Forward time: 0.55(0.55)  Batch time: 0.63(0.63)
+2023-10-20 09:52:46,493   INFO  Train:  108/130 ( 83%) [   1/464 (  0%)]  Loss: 0.5591 (0.533)  LR: 5.988e-04  Time cost: 00:01/04:12 [28:28/1:36:54]  Acc_iter 49650       Data time: 0.00(0.04)  Forward time: 0.50(0.52)  Batch time: 0.50(0.57)
+2023-10-20 09:52:46,862   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:52:46 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 61°C,  97 % | 18776 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 55°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:53:11,779   INFO  Train:  108/130 ( 83%) [  51/464 ( 11%)]  Loss: 0.4811 (0.509)  LR: 5.936e-04  Time cost: 00:26/03:29 [28:54/1:29:47]  Acc_iter 49700       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 09:53:36,750   INFO  Train:  108/130 ( 83%) [ 101/464 ( 22%)]  Loss: 0.4841 (0.510)  LR: 5.884e-04  Time cost: 00:51/03:02 [29:19/1:28:41]  Acc_iter 49750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:54:01,722   INFO  Train:  108/130 ( 83%) [ 151/464 ( 33%)]  Loss: 0.4809 (0.508)  LR: 5.833e-04  Time cost: 01:16/02:37 [29:44/1:28:02]  Acc_iter 49800       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 09:54:02,090   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:54:02 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 18742 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:54:27,071   INFO  Train:  108/130 ( 83%) [ 201/464 ( 43%)]  Loss: 0.4994 (0.505)  LR: 5.781e-04  Time cost: 01:41/02:12 [30:09/1:27:50]  Acc_iter 49850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.50)
+2023-10-20 09:54:52,034   INFO  Train:  108/130 ( 83%) [ 251/464 ( 54%)]  Loss: 0.4883 (0.504)  LR: 5.730e-04  Time cost: 02:06/01:47 [30:34/1:27:16]  Acc_iter 49900       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:55:17,027   INFO  Train:  108/130 ( 83%) [ 301/464 ( 65%)]  Loss: 0.5371 (0.504)  LR: 5.679e-04  Time cost: 02:31/01:21 [30:59/1:26:46]  Acc_iter 49950       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 09:55:17,393   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:55:17 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  89 % | 18742 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:55:42,329   INFO  Train:  108/130 ( 83%) [ 351/464 ( 76%)]  Loss: 0.5403 (0.506)  LR: 5.628e-04  Time cost: 02:56/00:56 [31:24/1:26:27]  Acc_iter 50000       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 09:56:07,318   INFO  Train:  108/130 ( 83%) [ 401/464 ( 86%)]  Loss: 0.5008 (0.508)  LR: 5.577e-04  Time cost: 03:21/00:31 [31:49/1:25:58]  Acc_iter 50050       Data time: 0.00(0.00)  Forward time: 0.51(0.50)  Batch time: 0.51(0.50)
+2023-10-20 09:56:32,272   INFO  Train:  108/130 ( 83%) [ 451/464 ( 97%)]  Loss: 0.4970 (0.508)  LR: 5.527e-04  Time cost: 03:46/00:06 [32:14/1:25:30]  Acc_iter 50100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:56:32,673   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:56:32 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  24 % | 18742 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:56:38,643   INFO  Train:  108/130 ( 83%) [ 463/464 (100%)]  Loss: 0.6039 (0.508)  LR: 5.515e-04  Time cost: 03:53/00:00 [32:20/1:25:31]  Acc_iter 50112       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:56:45,966   INFO  Train:  109/130 ( 84%) [   0/464 (  0%)]  Loss: 0.5620 (0.562)  LR: 5.514e-04  Time cost: 00:00/04:41 [32:28/1:43:03]  Acc_iter 50113       Data time: 0.11(0.11)  Forward time: 0.52(0.52)  Batch time: 0.63(0.63)
+2023-10-20 09:57:04,420   INFO  Train:  109/130 ( 84%) [  37/464 (  8%)]  Loss: 0.4943 (0.503)  LR: 5.476e-04  Time cost: 00:19/03:34 [32:46/1:25:01]  Acc_iter 50150       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:57:29,404   INFO  Train:  109/130 ( 84%) [  87/464 ( 19%)]  Loss: 0.5062 (0.507)  LR: 5.426e-04  Time cost: 00:44/03:08 [33:11/1:24:25]  Acc_iter 50200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:57:54,344   INFO  Train:  109/130 ( 84%) [ 137/464 ( 30%)]  Loss: 0.5903 (0.507)  LR: 5.376e-04  Time cost: 01:08/02:43 [33:36/1:23:54]  Acc_iter 50250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:57:54,711   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:57:54 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  74 % | 18742 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:58:19,652   INFO  Train:  109/130 ( 84%) [ 187/464 ( 40%)]  Loss: 0.4504 (0.507)  LR: 5.326e-04  Time cost: 01:34/02:18 [34:01/1:23:46]  Acc_iter 50300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:58:44,584   INFO  Train:  109/130 ( 84%) [ 237/464 ( 51%)]  Loss: 0.5002 (0.507)  LR: 5.277e-04  Time cost: 01:59/01:53 [34:26/1:23:14]  Acc_iter 50350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:59:09,540   INFO  Train:  109/130 ( 84%) [ 287/464 ( 62%)]  Loss: 0.4479 (0.507)  LR: 5.227e-04  Time cost: 02:24/01:28 [34:51/1:22:46]  Acc_iter 50400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:59:09,905   INFO  kemove-Z790-D-DDR4          Fri Oct 20 09:59:09 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  83 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 09:59:34,883   INFO  Train:  109/130 ( 84%) [ 337/464 ( 73%)]  Loss: 0.5408 (0.507)  LR: 5.178e-04  Time cost: 02:49/01:03 [35:17/1:22:30]  Acc_iter 50450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 09:59:59,838   INFO  Train:  109/130 ( 84%) [ 387/464 ( 83%)]  Loss: 0.4672 (0.507)  LR: 5.129e-04  Time cost: 03:14/00:38 [35:42/1:22:02]  Acc_iter 50500       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:00:24,842   INFO  Train:  109/130 ( 84%) [ 437/464 ( 94%)]  Loss: 0.5052 (0.507)  LR: 5.080e-04  Time cost: 03:39/00:13 [36:07/1:21:36]  Acc_iter 50550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:00:25,211   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:00:25 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  47 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:00:38,154   INFO  Train:  109/130 ( 84%) [ 463/464 (100%)]  Loss: 0.4987 (0.506)  LR: 5.054e-04  Time cost: 03:52/00:00 [36:20/1:21:29]  Acc_iter 50576       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:00:45,503   INFO  Train:  110/130 ( 85%) [   0/464 (  0%)]  Loss: 0.5816 (0.582)  LR: 5.053e-04  Time cost: 00:00/04:51 [36:27/1:41:57]  Acc_iter 50577       Data time: 0.11(0.11)  Forward time: 0.56(0.56)  Batch time: 0.67(0.67)
+2023-10-20 10:00:56,949   INFO  Train:  110/130 ( 85%) [  23/464 (  5%)]  Loss: 0.5515 (0.497)  LR: 5.031e-04  Time cost: 00:12/03:41 [36:39/1:21:30]  Acc_iter 50600       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:01:21,882   INFO  Train:  110/130 ( 85%) [  73/464 ( 16%)]  Loss: 0.5244 (0.500)  LR: 4.982e-04  Time cost: 00:37/03:15 [37:04/1:20:36]  Acc_iter 50650       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:01:46,900   INFO  Train:  110/130 ( 85%) [ 123/464 ( 27%)]  Loss: 0.6647 (0.501)  LR: 4.934e-04  Time cost: 01:02/02:50 [37:29/1:20:12]  Acc_iter 50700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:01:47,269   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:01:47 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  89 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:02:12,214   INFO  Train:  110/130 ( 85%) [ 173/464 ( 37%)]  Loss: 0.5318 (0.505)  LR: 4.886e-04  Time cost: 01:27/02:26 [37:54/1:20:04]  Acc_iter 50750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:02:37,150   INFO  Train:  110/130 ( 85%) [ 223/464 ( 48%)]  Loss: 0.5517 (0.503)  LR: 4.838e-04  Time cost: 01:52/02:00 [38:19/1:19:32]  Acc_iter 50800       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:03:02,100   INFO  Train:  110/130 ( 85%) [ 273/464 ( 59%)]  Loss: 0.5440 (0.504)  LR: 4.790e-04  Time cost: 02:17/01:35 [38:44/1:19:03]  Acc_iter 50850       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:03:02,470   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:03:02 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  99 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:03:27,372   INFO  Train:  110/130 ( 85%) [ 323/464 ( 70%)]  Loss: 0.4587 (0.504)  LR: 4.743e-04  Time cost: 02:42/01:10 [39:09/1:18:44]  Acc_iter 50900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:03:52,387   INFO  Train:  110/130 ( 85%) [ 373/464 ( 80%)]  Loss: 0.5054 (0.505)  LR: 4.695e-04  Time cost: 03:07/00:45 [39:34/1:18:18]  Acc_iter 50950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:04:17,374   INFO  Train:  110/130 ( 85%) [ 423/464 ( 91%)]  Loss: 0.5108 (0.505)  LR: 4.648e-04  Time cost: 03:32/00:20 [39:59/1:17:51]  Acc_iter 51000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:04:17,743   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:04:17 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  46 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:04:37,721   INFO  Train:  110/130 ( 85%) [ 463/464 (100%)]  Loss: 0.5672 (0.505)  LR: 4.610e-04  Time cost: 03:52/00:00 [40:20/1:17:37]  Acc_iter 51040       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:04:45,092   INFO  Train:  111/130 ( 85%) [   0/464 (  0%)]  Loss: 0.4617 (0.462)  LR: 4.609e-04  Time cost: 00:00/04:59 [40:27/1:39:47]  Acc_iter 51041       Data time: 0.09(0.09)  Forward time: 0.54(0.54)  Batch time: 0.63(0.63)
+2023-10-20 10:04:49,589   INFO  Train:  111/130 ( 85%) [   9/464 (  2%)]  Loss: 0.4583 (0.483)  LR: 4.601e-04  Time cost: 00:05/03:53 [40:31/1:19:27]  Acc_iter 51050       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:05:14,472   INFO  Train:  111/130 ( 85%) [  59/464 ( 13%)]  Loss: 0.4763 (0.489)  LR: 4.554e-04  Time cost: 00:30/03:22 [40:56/1:16:54]  Acc_iter 51100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:05:39,384   INFO  Train:  111/130 ( 85%) [ 109/464 ( 23%)]  Loss: 0.5408 (0.496)  LR: 4.508e-04  Time cost: 00:54/02:57 [41:21/1:16:20]  Acc_iter 51150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:05:39,751   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:05:39 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  63 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:06:04,699   INFO  Train:  111/130 ( 85%) [ 159/464 ( 34%)]  Loss: 0.4681 (0.499)  LR: 4.461e-04  Time cost: 01:20/02:32 [41:46/1:16:14]  Acc_iter 51200       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:06:29,673   INFO  Train:  111/130 ( 85%) [ 209/464 ( 45%)]  Loss: 0.4719 (0.501)  LR: 4.415e-04  Time cost: 01:45/02:07 [42:11/1:15:45]  Acc_iter 51250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:06:54,649   INFO  Train:  111/130 ( 85%) [ 259/464 ( 56%)]  Loss: 0.4788 (0.502)  LR: 4.369e-04  Time cost: 02:10/01:42 [42:36/1:15:17]  Acc_iter 51300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:06:55,018   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:06:55 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C, 100 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:07:19,972   INFO  Train:  111/130 ( 85%) [ 309/464 ( 67%)]  Loss: 0.5275 (0.501)  LR: 4.323e-04  Time cost: 02:35/01:17 [43:02/1:15:00]  Acc_iter 51350       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:07:44,926   INFO  Train:  111/130 ( 85%) [ 359/464 ( 77%)]  Loss: 0.4280 (0.501)  LR: 4.277e-04  Time cost: 03:00/00:52 [43:27/1:14:32]  Acc_iter 51400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:08:09,884   INFO  Train:  111/130 ( 85%) [ 409/464 ( 88%)]  Loss: 0.4610 (0.502)  LR: 4.232e-04  Time cost: 03:25/00:27 [43:52/1:14:04]  Acc_iter 51450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:08:10,256   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:08:10 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  35 % | 18733 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:08:35,241   INFO  Train:  111/130 ( 85%) [ 459/464 ( 99%)]  Loss: 0.5276 (0.502)  LR: 4.187e-04  Time cost: 03:50/00:02 [44:17/1:13:45]  Acc_iter 51500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:08:37,225   INFO  Train:  111/130 ( 85%) [ 463/464 (100%)]  Loss: 0.4562 (0.501)  LR: 4.183e-04  Time cost: 03:52/00:00 [44:19/1:13:43]  Acc_iter 51504       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:08:44,599   INFO  Train:  112/130 ( 86%) [   0/464 (  0%)]  Loss: 0.4095 (0.410)  LR: 4.182e-04  Time cost: 00:00/04:35 [44:26/1:27:22]  Acc_iter 51505       Data time: 0.08(0.08)  Forward time: 0.56(0.56)  Batch time: 0.65(0.65)
+2023-10-20 10:09:07,034   INFO  Train:  112/130 ( 86%) [  45/464 ( 10%)]  Loss: 0.4646 (0.504)  LR: 4.142e-04  Time cost: 00:23/03:29 [44:49/1:13:11]  Acc_iter 51550       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:09:31,961   INFO  Train:  112/130 ( 86%) [  95/464 ( 20%)]  Loss: 0.5592 (0.501)  LR: 4.097e-04  Time cost: 00:47/03:04 [45:14/1:12:36]  Acc_iter 51600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:09:32,336   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:09:32 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  85 % | 18745 / 24576 MB | kemove(18484M) root(181M)
+[1] NVIDIA GeForce RTX 3090 | 58°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:09:57,338   INFO  Train:  112/130 ( 86%) [ 145/464 ( 31%)]  Loss: 0.4704 (0.500)  LR: 4.052e-04  Time cost: 01:13/02:40 [45:39/1:12:35]  Acc_iter 51650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:10:22,506   INFO  Train:  112/130 ( 86%) [ 195/464 ( 42%)]  Loss: 0.4880 (0.500)  LR: 4.008e-04  Time cost: 01:38/02:15 [46:04/1:12:12]  Acc_iter 51700       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:10:47,473   INFO  Train:  112/130 ( 86%) [ 245/464 ( 53%)]  Loss: 0.4544 (0.501)  LR: 3.964e-04  Time cost: 02:03/01:49 [46:29/1:11:41]  Acc_iter 51750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:10:47,842   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:10:47 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  52 % | 18778 / 24576 MB | kemove(18484M) root(182M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:11:12,832   INFO  Train:  112/130 ( 86%) [ 295/464 ( 64%)]  Loss: 0.5463 (0.501)  LR: 3.920e-04  Time cost: 02:28/01:24 [46:55/1:11:24]  Acc_iter 51800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:11:38,179   INFO  Train:  112/130 ( 86%) [ 345/464 ( 74%)]  Loss: 0.4924 (0.502)  LR: 3.876e-04  Time cost: 02:54/00:59 [47:20/1:11:04]  Acc_iter 51850       Data time: 0.00(0.00)  Forward time: 0.51(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:12:03,183   INFO  Train:  112/130 ( 86%) [ 395/464 ( 85%)]  Loss: 0.4560 (0.502)  LR: 3.832e-04  Time cost: 03:19/00:34 [47:45/1:10:35]  Acc_iter 51900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:12:03,555   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:12:03 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C, 100 % | 20928 / 24576 MB | kemove(18484M) root(222M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:12:28,522   INFO  Train:  112/130 ( 86%) [ 445/464 ( 96%)]  Loss: 0.5391 (0.502)  LR: 3.789e-04  Time cost: 03:44/00:09 [48:10/1:10:13]  Acc_iter 51950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:12:37,506   INFO  Train:  112/130 ( 86%) [ 463/464 (100%)]  Loss: 0.5659 (0.502)  LR: 3.773e-04  Time cost: 03:53/00:00 [48:19/1:10:03]  Acc_iter 51968       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:12:44,904   INFO  Train:  113/130 ( 87%) [   0/464 (  0%)]  Loss: 0.4967 (0.497)  LR: 3.773e-04  Time cost: 00:00/05:18 [48:27/1:35:36]  Acc_iter 51969       Data time: 0.09(0.09)  Forward time: 0.56(0.56)  Batch time: 0.65(0.65)
+2023-10-20 10:13:00,412   INFO  Train:  113/130 ( 87%) [  31/464 (  7%)]  Loss: 0.4689 (0.495)  LR: 3.746e-04  Time cost: 00:16/03:39 [48:42/1:10:11]  Acc_iter 52000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:13:25,440   INFO  Train:  113/130 ( 87%) [  81/464 ( 17%)]  Loss: 0.4969 (0.496)  LR: 3.703e-04  Time cost: 00:41/03:12 [49:07/1:09:18]  Acc_iter 52050       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:13:25,810   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:13:25 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  60 % | 21064 / 24576 MB | kemove(18484M) root(261M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:13:50,806   INFO  Train:  113/130 ( 87%) [ 131/464 ( 28%)]  Loss: 0.4767 (0.496)  LR: 3.660e-04  Time cost: 01:06/02:47 [49:33/1:09:07]  Acc_iter 52100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:14:15,911   INFO  Train:  113/130 ( 87%) [ 181/464 ( 39%)]  Loss: 0.4784 (0.493)  LR: 3.618e-04  Time cost: 01:31/02:22 [49:58/1:08:36]  Acc_iter 52150       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:14:40,924   INFO  Train:  113/130 ( 87%) [ 231/464 ( 50%)]  Loss: 0.4938 (0.495)  LR: 3.575e-04  Time cost: 01:56/01:57 [50:23/1:08:05]  Acc_iter 52200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:14:41,297   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:14:41 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C, 100 % | 20961 / 24576 MB | kemove(18484M) root(240M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:15:06,254   INFO  Train:  113/130 ( 87%) [ 281/464 ( 61%)]  Loss: 0.4566 (0.497)  LR: 3.533e-04  Time cost: 02:22/01:32 [50:48/1:07:45]  Acc_iter 52250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:15:31,253   INFO  Train:  113/130 ( 87%) [ 331/464 ( 71%)]  Loss: 0.5778 (0.497)  LR: 3.491e-04  Time cost: 02:47/01:06 [51:13/1:07:15]  Acc_iter 52300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:15:56,259   INFO  Train:  113/130 ( 87%) [ 381/464 ( 82%)]  Loss: 0.4791 (0.497)  LR: 3.450e-04  Time cost: 03:12/00:41 [51:38/1:06:47]  Acc_iter 52350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:15:56,637   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:15:56 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  93 % | 20850 / 24576 MB | kemove(18484M) root(227M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:16:21,615   INFO  Train:  113/130 ( 87%) [ 431/464 ( 93%)]  Loss: 0.4668 (0.497)  LR: 3.408e-04  Time cost: 03:37/00:16 [52:03/1:06:26]  Acc_iter 52400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:16:37,571   INFO  Train:  113/130 ( 87%) [ 463/464 (100%)]  Loss: 0.5289 (0.497)  LR: 3.382e-04  Time cost: 03:53/00:00 [52:19/1:06:07]  Acc_iter 52432       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:16:44,934   INFO  Train:  114/130 ( 88%) [   0/464 (  0%)]  Loss: 0.4547 (0.455)  LR: 3.381e-04  Time cost: 00:00/05:06 [52:27/1:26:46]  Acc_iter 52433       Data time: 0.13(0.13)  Forward time: 0.53(0.53)  Batch time: 0.66(0.66)
+2023-10-20 10:16:53,414   INFO  Train:  114/130 ( 88%) [  17/464 (  4%)]  Loss: 0.4881 (0.496)  LR: 3.367e-04  Time cost: 00:09/03:46 [52:35/1:06:36]  Acc_iter 52450       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.49(0.51)
+2023-10-20 10:17:18,338   INFO  Train:  114/130 ( 88%) [  67/464 ( 14%)]  Loss: 0.4265 (0.492)  LR: 3.326e-04  Time cost: 00:34/03:18 [53:00/1:05:17]  Acc_iter 52500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:17:18,706   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:17:18 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  45 % | 20799 / 24576 MB | kemove(18484M) root(191M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:17:43,704   INFO  Train:  114/130 ( 88%) [ 117/464 ( 25%)]  Loss: 0.4972 (0.491)  LR: 3.285e-04  Time cost: 00:59/02:54 [53:25/1:05:13]  Acc_iter 52550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:18:08,729   INFO  Train:  114/130 ( 88%) [ 167/464 ( 36%)]  Loss: 0.5291 (0.493)  LR: 3.245e-04  Time cost: 01:24/02:29 [53:51/1:04:41]  Acc_iter 52600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:18:33,728   INFO  Train:  114/130 ( 88%) [ 217/464 ( 47%)]  Loss: 0.4537 (0.493)  LR: 3.205e-04  Time cost: 01:49/02:04 [54:16/1:04:11]  Acc_iter 52650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:18:34,098   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:18:34 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  51 % | 20930 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:18:59,022   INFO  Train:  114/130 ( 88%) [ 267/464 ( 58%)]  Loss: 0.4445 (0.494)  LR: 3.164e-04  Time cost: 02:14/01:39 [54:41/1:03:51]  Acc_iter 52700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:19:23,992   INFO  Train:  114/130 ( 88%) [ 317/464 ( 68%)]  Loss: 0.4581 (0.494)  LR: 3.125e-04  Time cost: 02:39/01:13 [55:06/1:03:22]  Acc_iter 52750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:19:48,982   INFO  Train:  114/130 ( 88%) [ 367/464 ( 79%)]  Loss: 0.4410 (0.495)  LR: 3.085e-04  Time cost: 03:04/00:48 [55:31/1:02:54]  Acc_iter 52800       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:19:49,362   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:19:49 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  90 % | 20930 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:20:14,300   INFO  Train:  114/130 ( 88%) [ 417/464 ( 90%)]  Loss: 0.4905 (0.495)  LR: 3.045e-04  Time cost: 03:30/00:23 [55:56/1:02:33]  Acc_iter 52850       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:20:37,266   INFO  Train:  114/130 ( 88%) [ 463/464 (100%)]  Loss: 0.4695 (0.495)  LR: 3.009e-04  Time cost: 03:52/00:00 [56:19/1:02:08]  Acc_iter 52896       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:20:44,613   INFO  Train:  115/130 ( 88%) [   0/464 (  0%)]  Loss: 0.5218 (0.522)  LR: 3.009e-04  Time cost: 00:00/04:46 [56:26/1:16:21]  Acc_iter 52897       Data time: 0.11(0.11)  Forward time: 0.52(0.52)  Batch time: 0.64(0.64)
+2023-10-20 10:20:46,118   INFO  Train:  115/130 ( 88%) [   3/464 (  1%)]  Loss: 0.5590 (0.542)  LR: 3.006e-04  Time cost: 00:02/04:04 [56:28/1:05:35]  Acc_iter 52900       Data time: 0.00(0.03)  Forward time: 0.50(0.51)  Batch time: 0.50(0.53)
+2023-10-20 10:21:11,501   INFO  Train:  115/130 ( 88%) [  53/464 ( 11%)]  Loss: 0.5798 (0.502)  LR: 2.967e-04  Time cost: 00:27/03:29 [56:53/1:02:34]  Acc_iter 52950       Data time: 0.00(0.00)  Forward time: 0.49(0.51)  Batch time: 0.49(0.51)
+2023-10-20 10:21:11,870   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:21:11 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C,  62 % | 20932 / 24576 MB | kemove(18484M) root(165M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:21:36,816   INFO  Train:  115/130 ( 88%) [ 103/464 ( 22%)]  Loss: 0.4268 (0.495)  LR: 2.929e-04  Time cost: 00:52/03:03 [57:19/1:01:58]  Acc_iter 53000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:22:01,777   INFO  Train:  115/130 ( 88%) [ 153/464 ( 33%)]  Loss: 0.4969 (0.494)  LR: 2.890e-04  Time cost: 01:17/02:37 [57:44/1:01:12]  Acc_iter 53050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:22:26,819   INFO  Train:  115/130 ( 88%) [ 203/464 ( 44%)]  Loss: 0.5614 (0.497)  LR: 2.852e-04  Time cost: 01:42/02:11 [58:09/1:00:39]  Acc_iter 53100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:22:27,193   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:22:27 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  33 % | 20930 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:22:52,713   INFO  Train:  115/130 ( 88%) [ 253/464 ( 55%)]  Loss: 0.5343 (0.496)  LR: 2.814e-04  Time cost: 02:08/01:46 [58:34/1:00:33]  Acc_iter 53150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:23:18,107   INFO  Train:  115/130 ( 88%) [ 303/464 ( 65%)]  Loss: 0.6899 (0.497)  LR: 2.776e-04  Time cost: 02:34/01:21 [59:00/1:00:09]  Acc_iter 53200       Data time: 0.00(0.00)  Forward time: 0.51(0.50)  Batch time: 0.51(0.51)
+2023-10-20 10:23:43,882   INFO  Train:  115/130 ( 88%) [ 353/464 ( 76%)]  Loss: 0.4654 (0.496)  LR: 2.738e-04  Time cost: 02:59/00:56 [59:26/59:53]  Acc_iter 53250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:23:44,250   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:23:44 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  76 % | 20923 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:24:09,250   INFO  Train:  115/130 ( 88%) [ 403/464 ( 87%)]  Loss: 0.5630 (0.496)  LR: 2.701e-04  Time cost: 03:25/00:30 [59:51/59:27]  Acc_iter 53300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:24:34,261   INFO  Train:  115/130 ( 88%) [ 453/464 ( 98%)]  Loss: 0.4225 (0.495)  LR: 2.664e-04  Time cost: 03:50/00:05 [1:00:16/58:55]  Acc_iter 53350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:24:39,257   INFO  Train:  115/130 ( 88%) [ 463/464 (100%)]  Loss: 0.5059 (0.495)  LR: 2.656e-04  Time cost: 03:55/00:00 [1:00:21/58:49]  Acc_iter 53360       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.51)
+2023-10-20 10:24:46,583   INFO  Train:  116/130 ( 89%) [   0/464 (  0%)]  Loss: 0.4489 (0.449)  LR: 2.656e-04  Time cost: 00:00/04:55 [1:00:28/1:13:51]  Acc_iter 53361       Data time: 0.13(0.13)  Forward time: 0.51(0.51)  Batch time: 0.64(0.64)
+2023-10-20 10:25:05,989   INFO  Train:  116/130 ( 89%) [  39/464 (  8%)]  Loss: 0.4541 (0.498)  LR: 2.627e-04  Time cost: 00:20/03:32 [1:00:48/57:47]  Acc_iter 53400       Data time: 0.00(0.00)  Forward time: 0.51(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:25:06,359   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:25:06 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C,  44 % | 20964 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 57°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:25:31,300   INFO  Train:  116/130 ( 89%) [  89/464 ( 19%)]  Loss: 0.4670 (0.494)  LR: 2.590e-04  Time cost: 00:45/03:08 [1:01:13/57:42]  Acc_iter 53450       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:25:56,342   INFO  Train:  116/130 ( 89%) [ 139/464 ( 30%)]  Loss: 0.5325 (0.494)  LR: 2.554e-04  Time cost: 01:10/02:43 [1:01:38/57:09]  Acc_iter 53500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:26:21,308   INFO  Train:  116/130 ( 89%) [ 189/464 ( 41%)]  Loss: 0.5232 (0.497)  LR: 2.517e-04  Time cost: 01:35/02:18 [1:02:03/56:38]  Acc_iter 53550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:26:21,678   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:26:21 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20963 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:26:46,594   INFO  Train:  116/130 ( 89%) [ 239/464 ( 52%)]  Loss: 0.5273 (0.495)  LR: 2.481e-04  Time cost: 02:00/01:53 [1:02:28/56:18]  Acc_iter 53600       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:27:11,569   INFO  Train:  116/130 ( 89%) [ 289/464 ( 62%)]  Loss: 0.4904 (0.494)  LR: 2.446e-04  Time cost: 02:25/01:27 [1:02:53/55:49]  Acc_iter 53650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:27:36,528   INFO  Train:  116/130 ( 89%) [ 339/464 ( 73%)]  Loss: 0.4742 (0.495)  LR: 2.410e-04  Time cost: 02:50/01:02 [1:03:18/55:21]  Acc_iter 53700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:27:36,901   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:27:36 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  36 % | 20963 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:28:01,859   INFO  Train:  116/130 ( 89%) [ 389/464 ( 84%)]  Loss: 0.4721 (0.497)  LR: 2.375e-04  Time cost: 03:15/00:37 [1:03:44/55:00]  Acc_iter 53750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:28:26,828   INFO  Train:  116/130 ( 89%) [ 439/464 ( 95%)]  Loss: 0.5528 (0.497)  LR: 2.340e-04  Time cost: 03:40/00:12 [1:04:09/54:33]  Acc_iter 53800       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:28:38,797   INFO  Train:  116/130 ( 89%) [ 463/464 (100%)]  Loss: 0.4191 (0.496)  LR: 2.323e-04  Time cost: 03:52/00:00 [1:04:21/54:20]  Acc_iter 53824       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:28:46,186   INFO  Train:  117/130 ( 90%) [   0/464 (  0%)]  Loss: 0.4711 (0.471)  LR: 2.322e-04  Time cost: 00:00/04:47 [1:04:28/1:07:00]  Acc_iter 53825       Data time: 0.09(0.09)  Forward time: 0.57(0.57)  Batch time: 0.66(0.66)
+2023-10-20 10:28:58,653   INFO  Train:  117/130 ( 90%) [  25/464 (  5%)]  Loss: 0.5697 (0.503)  LR: 2.305e-04  Time cost: 00:13/03:40 [1:04:40/54:16]  Acc_iter 53850       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:28:59,030   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:28:59 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 63°C, 100 % | 20962 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 57°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:29:23,962   INFO  Train:  117/130 ( 90%) [  75/464 ( 16%)]  Loss: 0.5123 (0.495)  LR: 2.271e-04  Time cost: 00:38/03:16 [1:05:06/54:03]  Acc_iter 53900       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:29:48,903   INFO  Train:  117/130 ( 90%) [ 125/464 ( 27%)]  Loss: 0.4179 (0.496)  LR: 2.236e-04  Time cost: 01:03/02:50 [1:05:31/53:22]  Acc_iter 53950       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:30:13,820   INFO  Train:  117/130 ( 90%) [ 175/464 ( 38%)]  Loss: 0.5026 (0.495)  LR: 2.202e-04  Time cost: 01:28/02:24 [1:05:56/52:49]  Acc_iter 54000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:30:14,191   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:30:14 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20962 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:30:39,114   INFO  Train:  117/130 ( 90%) [ 225/464 ( 48%)]  Loss: 0.4434 (0.495)  LR: 2.168e-04  Time cost: 01:53/02:00 [1:06:21/52:30]  Acc_iter 54050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:31:04,095   INFO  Train:  117/130 ( 90%) [ 275/464 ( 59%)]  Loss: 0.4916 (0.493)  LR: 2.135e-04  Time cost: 02:18/01:34 [1:06:46/52:02]  Acc_iter 54100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:31:29,047   INFO  Train:  117/130 ( 90%) [ 325/464 ( 70%)]  Loss: 0.5154 (0.493)  LR: 2.101e-04  Time cost: 02:43/01:09 [1:07:11/51:34]  Acc_iter 54150       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:31:29,418   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:31:29 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  32 % | 20962 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:31:54,341   INFO  Train:  117/130 ( 90%) [ 375/464 ( 81%)]  Loss: 0.5330 (0.494)  LR: 2.068e-04  Time cost: 03:08/00:44 [1:07:36/51:13]  Acc_iter 54200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:32:19,317   INFO  Train:  117/130 ( 90%) [ 425/464 ( 92%)]  Loss: 0.4872 (0.494)  LR: 2.035e-04  Time cost: 03:33/00:19 [1:08:01/50:46]  Acc_iter 54250       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:32:38,302   INFO  Train:  117/130 ( 90%) [ 463/464 (100%)]  Loss: 0.4734 (0.493)  LR: 2.011e-04  Time cost: 03:52/00:00 [1:08:20/50:26]  Acc_iter 54288       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:32:45,707   INFO  Train:  118/130 ( 91%) [   0/464 (  0%)]  Loss: 0.4823 (0.482)  LR: 2.010e-04  Time cost: 00:00/05:11 [1:08:27/1:07:33]  Acc_iter 54289       Data time: 0.15(0.15)  Forward time: 0.53(0.53)  Batch time: 0.68(0.68)
+2023-10-20 10:32:51,186   INFO  Train:  118/130 ( 91%) [  11/464 (  2%)]  Loss: 0.5575 (0.503)  LR: 2.003e-04  Time cost: 00:06/03:52 [1:08:33/51:26]  Acc_iter 54300       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.49(0.51)
+2023-10-20 10:32:51,558   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:32:51 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 62°C, 100 % | 20962 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 56°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:33:16,474   INFO  Train:  118/130 ( 91%) [  61/464 ( 13%)]  Loss: 0.4793 (0.489)  LR: 1.970e-04  Time cost: 00:31/03:24 [1:08:58/50:27]  Acc_iter 54350       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.49(0.51)
+2023-10-20 10:33:41,441   INFO  Train:  118/130 ( 91%) [ 111/464 ( 24%)]  Loss: 0.4815 (0.486)  LR: 1.938e-04  Time cost: 00:56/02:57 [1:09:23/49:41]  Acc_iter 54400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:34:06,434   INFO  Train:  118/130 ( 91%) [ 161/464 ( 35%)]  Loss: 0.5314 (0.488)  LR: 1.906e-04  Time cost: 01:21/02:32 [1:09:48/49:09]  Acc_iter 54450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:34:06,811   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:34:06 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  51 % | 20905 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:34:31,770   INFO  Train:  118/130 ( 91%) [ 211/464 ( 45%)]  Loss: 0.4821 (0.492)  LR: 1.875e-04  Time cost: 01:46/02:07 [1:10:14/48:50]  Acc_iter 54500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:34:56,717   INFO  Train:  118/130 ( 91%) [ 261/464 ( 56%)]  Loss: 0.4792 (0.490)  LR: 1.843e-04  Time cost: 02:11/01:42 [1:10:39/48:20]  Acc_iter 54550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:35:21,688   INFO  Train:  118/130 ( 91%) [ 311/464 ( 67%)]  Loss: 0.4489 (0.490)  LR: 1.812e-04  Time cost: 02:36/01:16 [1:11:03/47:52]  Acc_iter 54600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:35:22,058   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:35:22 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  89 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:35:46,951   INFO  Train:  118/130 ( 91%) [ 361/464 ( 78%)]  Loss: 0.4625 (0.490)  LR: 1.781e-04  Time cost: 03:01/00:51 [1:11:29/47:29]  Acc_iter 54650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:36:11,885   INFO  Train:  118/130 ( 91%) [ 411/464 ( 89%)]  Loss: 0.4199 (0.489)  LR: 1.751e-04  Time cost: 03:26/00:26 [1:11:54/47:02]  Acc_iter 54700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:36:36,841   INFO  Train:  118/130 ( 91%) [ 461/464 ( 99%)]  Loss: 0.4738 (0.491)  LR: 1.720e-04  Time cost: 03:51/00:01 [1:12:19/46:35]  Acc_iter 54750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:36:37,207   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:36:37 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  78 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:36:38,195   INFO  Train:  118/130 ( 91%) [ 463/464 (100%)]  Loss: 0.4682 (0.491)  LR: 1.719e-04  Time cost: 03:53/00:00 [1:12:20/46:38]  Acc_iter 54752       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:36:45,541   INFO  Train:  119/130 ( 92%) [   0/464 (  0%)]  Loss: 0.4947 (0.495)  LR: 1.718e-04  Time cost: 00:00/04:40 [1:12:27/56:11]  Acc_iter 54753       Data time: 0.10(0.10)  Forward time: 0.56(0.56)  Batch time: 0.67(0.67)
+2023-10-20 10:37:08,996   INFO  Train:  119/130 ( 92%) [  47/464 ( 10%)]  Loss: 0.5033 (0.481)  LR: 1.690e-04  Time cost: 00:24/03:29 [1:12:51/46:07]  Acc_iter 54800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:37:33,931   INFO  Train:  119/130 ( 92%) [  97/464 ( 21%)]  Loss: 0.4487 (0.489)  LR: 1.660e-04  Time cost: 00:48/03:03 [1:13:16/45:35]  Acc_iter 54850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:37:58,895   INFO  Train:  119/130 ( 92%) [ 147/464 ( 32%)]  Loss: 0.4452 (0.486)  LR: 1.631e-04  Time cost: 01:13/02:38 [1:13:41/45:09]  Acc_iter 54900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:37:59,266   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:37:59 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C, 100 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:38:24,222   INFO  Train:  119/130 ( 92%) [ 197/464 ( 42%)]  Loss: 0.5270 (0.486)  LR: 1.601e-04  Time cost: 01:39/02:13 [1:14:06/44:53]  Acc_iter 54950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:38:49,178   INFO  Train:  119/130 ( 92%) [ 247/464 ( 53%)]  Loss: 0.5047 (0.485)  LR: 1.572e-04  Time cost: 02:04/01:48 [1:14:31/44:25]  Acc_iter 55000       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:39:14,158   INFO  Train:  119/130 ( 92%) [ 297/464 ( 64%)]  Loss: 0.4753 (0.485)  LR: 1.543e-04  Time cost: 02:29/01:23 [1:14:56/43:59]  Acc_iter 55050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:39:14,526   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:39:14 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  63 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:39:39,483   INFO  Train:  119/130 ( 92%) [ 347/464 ( 75%)]  Loss: 0.4153 (0.485)  LR: 1.515e-04  Time cost: 02:54/00:58 [1:15:21/43:38]  Acc_iter 55100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:40:04,459   INFO  Train:  119/130 ( 92%) [ 397/464 ( 86%)]  Loss: 0.4889 (0.485)  LR: 1.486e-04  Time cost: 03:19/00:33 [1:15:46/43:12]  Acc_iter 55150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:40:29,468   INFO  Train:  119/130 ( 92%) [ 447/464 ( 96%)]  Loss: 0.4960 (0.486)  LR: 1.458e-04  Time cost: 03:44/00:08 [1:16:11/42:46]  Acc_iter 55200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:40:29,850   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:40:29 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  30 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:40:37,817   INFO  Train:  119/130 ( 92%) [ 463/464 (100%)]  Loss: 0.4128 (0.487)  LR: 1.449e-04  Time cost: 03:52/00:00 [1:16:20/42:42]  Acc_iter 55216       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:40:45,133   INFO  Train:  120/130 ( 92%) [   0/464 (  0%)]  Loss: 0.6095 (0.610)  LR: 1.449e-04  Time cost: 00:00/04:58 [1:16:27/54:39]  Acc_iter 55217       Data time: 0.12(0.12)  Forward time: 0.52(0.52)  Batch time: 0.64(0.64)
+2023-10-20 10:41:01,574   INFO  Train:  120/130 ( 92%) [  33/464 (  7%)]  Loss: 0.5107 (0.491)  LR: 1.430e-04  Time cost: 00:17/03:36 [1:16:43/42:27]  Acc_iter 55250       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:41:26,480   INFO  Train:  120/130 ( 92%) [  83/464 ( 18%)]  Loss: 0.4559 (0.483)  LR: 1.403e-04  Time cost: 00:41/03:10 [1:17:08/41:49]  Acc_iter 55300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:41:51,437   INFO  Train:  120/130 ( 92%) [ 133/464 ( 29%)]  Loss: 0.4522 (0.483)  LR: 1.375e-04  Time cost: 01:06/02:45 [1:17:33/41:23]  Acc_iter 55350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:41:51,822   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:41:51 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  29 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:42:16,766   INFO  Train:  120/130 ( 92%) [ 183/464 ( 39%)]  Loss: 0.5459 (0.485)  LR: 1.348e-04  Time cost: 01:32/02:20 [1:17:59/41:07]  Acc_iter 55400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:42:41,725   INFO  Train:  120/130 ( 92%) [ 233/464 ( 50%)]  Loss: 0.5063 (0.485)  LR: 1.321e-04  Time cost: 01:57/01:55 [1:18:24/40:40]  Acc_iter 55450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:43:06,669   INFO  Train:  120/130 ( 92%) [ 283/464 ( 61%)]  Loss: 0.5038 (0.485)  LR: 1.295e-04  Time cost: 02:22/01:30 [1:18:48/40:13]  Acc_iter 55500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:43:07,040   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:43:07 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  57 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:43:32,033   INFO  Train:  120/130 ( 92%) [ 333/464 ( 72%)]  Loss: 0.4349 (0.487)  LR: 1.268e-04  Time cost: 02:47/01:05 [1:19:14/39:53]  Acc_iter 55550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:43:56,988   INFO  Train:  120/130 ( 92%) [ 383/464 ( 83%)]  Loss: 0.4482 (0.486)  LR: 1.242e-04  Time cost: 03:12/00:40 [1:19:39/39:26]  Acc_iter 55600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:44:21,932   INFO  Train:  120/130 ( 92%) [ 433/464 ( 93%)]  Loss: 0.4901 (0.485)  LR: 1.216e-04  Time cost: 03:37/00:15 [1:20:04/39:00]  Acc_iter 55650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:44:22,302   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:44:22 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  99 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:44:37,303   INFO  Train:  120/130 ( 92%) [ 463/464 (100%)]  Loss: 0.4605 (0.485)  LR: 1.201e-04  Time cost: 03:52/00:00 [1:20:19/38:48]  Acc_iter 55680       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:44:44,616   INFO  Train:  121/130 ( 93%) [   0/464 (  0%)]  Loss: 0.4831 (0.483)  LR: 1.201e-04  Time cost: 00:00/04:55 [1:20:26/49:16]  Acc_iter 55681       Data time: 0.12(0.12)  Forward time: 0.53(0.53)  Batch time: 0.65(0.65)
+2023-10-20 10:44:54,101   INFO  Train:  121/130 ( 93%) [  19/464 (  4%)]  Loss: 0.4798 (0.478)  LR: 1.191e-04  Time cost: 00:10/03:45 [1:20:36/38:58]  Acc_iter 55700       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 10:45:19,031   INFO  Train:  121/130 ( 93%) [  69/464 ( 15%)]  Loss: 0.4877 (0.482)  LR: 1.166e-04  Time cost: 00:35/03:17 [1:21:01/38:08]  Acc_iter 55750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:45:43,984   INFO  Train:  121/130 ( 93%) [ 119/464 ( 26%)]  Loss: 0.5794 (0.483)  LR: 1.141e-04  Time cost: 01:00/02:52 [1:21:26/37:40]  Acc_iter 55800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:45:44,355   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:45:44 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  41 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:46:09,332   INFO  Train:  121/130 ( 93%) [ 169/464 ( 36%)]  Loss: 0.4220 (0.481)  LR: 1.116e-04  Time cost: 01:25/02:28 [1:21:51/37:24]  Acc_iter 55850       Data time: 0.01(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:46:34,317   INFO  Train:  121/130 ( 93%) [ 219/464 ( 47%)]  Loss: 0.5482 (0.480)  LR: 1.091e-04  Time cost: 01:50/02:02 [1:22:16/36:57]  Acc_iter 55900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:46:59,250   INFO  Train:  121/130 ( 93%) [ 269/464 ( 58%)]  Loss: 0.3976 (0.481)  LR: 1.067e-04  Time cost: 02:15/01:37 [1:22:41/36:29]  Acc_iter 55950       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:46:59,623   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:46:59 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  85 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:47:24,564   INFO  Train:  121/130 ( 93%) [ 319/464 ( 69%)]  Loss: 0.4536 (0.481)  LR: 1.043e-04  Time cost: 02:40/01:12 [1:23:06/36:08]  Acc_iter 56000       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:47:49,520   INFO  Train:  121/130 ( 93%) [ 369/464 ( 80%)]  Loss: 0.5074 (0.483)  LR: 1.019e-04  Time cost: 03:05/00:47 [1:23:31/35:41]  Acc_iter 56050       Data time: 0.00(0.00)  Forward time: 0.51(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:48:14,502   INFO  Train:  121/130 ( 93%) [ 419/464 ( 90%)]  Loss: 0.4055 (0.482)  LR: 9.959e-05  Time cost: 03:30/00:22 [1:23:56/35:15]  Acc_iter 56100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:48:14,871   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:48:14 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:48:36,828   INFO  Train:  121/130 ( 93%) [ 463/464 (100%)]  Loss: 0.4474 (0.483)  LR: 9.755e-05  Time cost: 03:52/00:00 [1:24:19/34:56]  Acc_iter 56144       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:48:44,157   INFO  Train:  122/130 ( 94%) [   0/464 (  0%)]  Loss: 0.4939 (0.494)  LR: 9.750e-05  Time cost: 00:00/04:56 [1:24:26/44:24]  Acc_iter 56145       Data time: 0.11(0.11)  Forward time: 0.53(0.53)  Batch time: 0.64(0.64)
+2023-10-20 10:48:46,649   INFO  Train:  122/130 ( 94%) [   5/464 (  1%)]  Loss: 0.5616 (0.506)  LR: 9.727e-05  Time cost: 00:03/03:59 [1:24:28/36:16]  Acc_iter 56150       Data time: 0.00(0.02)  Forward time: 0.49(0.50)  Batch time: 0.49(0.52)
+2023-10-20 10:49:11,562   INFO  Train:  122/130 ( 94%) [  55/464 ( 12%)]  Loss: 0.4982 (0.494)  LR: 9.498e-05  Time cost: 00:28/03:24 [1:24:53/34:23]  Acc_iter 56200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:49:36,513   INFO  Train:  122/130 ( 94%) [ 105/464 ( 23%)]  Loss: 0.5205 (0.490)  LR: 9.272e-05  Time cost: 00:52/02:59 [1:25:18/33:55]  Acc_iter 56250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:49:36,884   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:49:36 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  43 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:50:01,868   INFO  Train:  122/130 ( 94%) [ 155/464 ( 33%)]  Loss: 0.5108 (0.487)  LR: 9.048e-05  Time cost: 01:18/02:35 [1:25:44/33:39]  Acc_iter 56300       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:50:26,867   INFO  Train:  122/130 ( 94%) [ 205/464 ( 44%)]  Loss: 0.5589 (0.486)  LR: 8.826e-05  Time cost: 01:43/02:09 [1:26:09/33:12]  Acc_iter 56350       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:50:51,792   INFO  Train:  122/130 ( 94%) [ 255/464 ( 55%)]  Loss: 0.5657 (0.487)  LR: 8.608e-05  Time cost: 02:08/01:44 [1:26:34/32:44]  Acc_iter 56400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:50:52,160   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:50:52 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  92 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:51:17,078   INFO  Train:  122/130 ( 94%) [ 305/464 ( 66%)]  Loss: 0.3885 (0.486)  LR: 8.392e-05  Time cost: 02:33/01:19 [1:26:59/32:22]  Acc_iter 56450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:51:42,057   INFO  Train:  122/130 ( 94%) [ 355/464 ( 77%)]  Loss: 0.5199 (0.486)  LR: 8.178e-05  Time cost: 02:58/00:54 [1:27:24/31:56]  Acc_iter 56500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:52:07,023   INFO  Train:  122/130 ( 94%) [ 405/464 ( 87%)]  Loss: 0.4906 (0.488)  LR: 7.968e-05  Time cost: 03:23/00:29 [1:27:49/31:30]  Acc_iter 56550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.51(0.50)
+2023-10-20 10:52:07,391   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:52:07 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:52:32,343   INFO  Train:  122/130 ( 94%) [ 455/464 ( 98%)]  Loss: 0.4216 (0.487)  LR: 7.760e-05  Time cost: 03:48/00:04 [1:28:14/31:07]  Acc_iter 56600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:52:36,337   INFO  Train:  122/130 ( 94%) [ 463/464 (100%)]  Loss: 0.4917 (0.487)  LR: 7.727e-05  Time cost: 03:52/00:00 [1:28:18/31:03]  Acc_iter 56608       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:52:43,639   INFO  Train:  123/130 ( 95%) [   0/464 (  0%)]  Loss: 0.5577 (0.558)  LR: 7.722e-05  Time cost: 00:00/04:35 [1:28:25/36:46]  Acc_iter 56609       Data time: 0.09(0.09)  Forward time: 0.55(0.55)  Batch time: 0.64(0.64)
+2023-10-20 10:53:04,068   INFO  Train:  123/130 ( 95%) [  41/464 (  9%)]  Loss: 0.4504 (0.474)  LR: 7.554e-05  Time cost: 00:21/03:31 [1:28:46/30:37]  Acc_iter 56650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:53:28,977   INFO  Train:  123/130 ( 95%) [  91/464 ( 20%)]  Loss: 0.4758 (0.485)  LR: 7.352e-05  Time cost: 00:45/03:06 [1:29:11/30:07]  Acc_iter 56700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:53:29,345   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:53:29 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:53:54,280   INFO  Train:  123/130 ( 95%) [ 141/464 ( 30%)]  Loss: 0.4818 (0.486)  LR: 7.152e-05  Time cost: 01:11/02:42 [1:29:36/29:51]  Acc_iter 56750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:54:19,227   INFO  Train:  123/130 ( 95%) [ 191/464 ( 41%)]  Loss: 0.4505 (0.487)  LR: 6.955e-05  Time cost: 01:36/02:16 [1:30:01/29:23]  Acc_iter 56800       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 10:54:44,201   INFO  Train:  123/130 ( 95%) [ 241/464 ( 52%)]  Loss: 0.4421 (0.485)  LR: 6.760e-05  Time cost: 02:01/01:51 [1:30:26/28:57]  Acc_iter 56850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:54:44,571   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:54:44 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  36 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:55:09,537   INFO  Train:  123/130 ( 95%) [ 291/464 ( 63%)]  Loss: 0.5120 (0.486)  LR: 6.568e-05  Time cost: 02:26/01:26 [1:30:51/28:36]  Acc_iter 56900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:55:34,481   INFO  Train:  123/130 ( 95%) [ 341/464 ( 73%)]  Loss: 0.5018 (0.485)  LR: 6.379e-05  Time cost: 02:51/01:01 [1:31:16/28:09]  Acc_iter 56950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:55:59,473   INFO  Train:  123/130 ( 95%) [ 391/464 ( 84%)]  Loss: 0.4583 (0.485)  LR: 6.193e-05  Time cost: 03:16/00:36 [1:31:41/27:44]  Acc_iter 57000       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:55:59,860   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:55:59 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  83 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:56:24,815   INFO  Train:  123/130 ( 95%) [ 441/464 ( 95%)]  Loss: 0.5094 (0.485)  LR: 6.009e-05  Time cost: 03:41/00:11 [1:32:07/27:21]  Acc_iter 57050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:56:35,830   INFO  Train:  123/130 ( 95%) [ 463/464 (100%)]  Loss: 0.4456 (0.485)  LR: 5.929e-05  Time cost: 03:52/00:00 [1:32:18/27:09]  Acc_iter 57072       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:56:43,179   INFO  Train:  124/130 ( 95%) [   0/464 (  0%)]  Loss: 0.4482 (0.448)  LR: 5.925e-05  Time cost: 00:00/05:02 [1:32:25/35:20]  Acc_iter 57073       Data time: 0.13(0.13)  Forward time: 0.53(0.53)  Batch time: 0.65(0.65)
+2023-10-20 10:56:56,641   INFO  Train:  124/130 ( 95%) [  27/464 (  6%)]  Loss: 0.4662 (0.487)  LR: 5.828e-05  Time cost: 00:14/03:40 [1:32:38/27:03]  Acc_iter 57100       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:57:21,580   INFO  Train:  124/130 ( 95%) [  77/464 ( 17%)]  Loss: 0.5230 (0.484)  LR: 5.650e-05  Time cost: 00:39/03:13 [1:33:03/26:27]  Acc_iter 57150       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:57:21,950   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:57:21 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  50 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:57:46,872   INFO  Train:  124/130 ( 95%) [ 127/464 ( 27%)]  Loss: 0.4459 (0.490)  LR: 5.474e-05  Time cost: 01:04/02:49 [1:33:29/26:08]  Acc_iter 57200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:58:11,816   INFO  Train:  124/130 ( 95%) [ 177/464 ( 38%)]  Loss: 0.4340 (0.489)  LR: 5.301e-05  Time cost: 01:29/02:23 [1:33:54/25:40]  Acc_iter 57250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:58:36,740   INFO  Train:  124/130 ( 95%) [ 227/464 ( 49%)]  Loss: 0.4975 (0.490)  LR: 5.131e-05  Time cost: 01:54/01:58 [1:34:19/25:13]  Acc_iter 57300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:58:37,110   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:58:37 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  43 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 10:59:02,090   INFO  Train:  124/130 ( 95%) [ 277/464 ( 60%)]  Loss: 0.5011 (0.488)  LR: 4.964e-05  Time cost: 02:19/01:33 [1:34:44/24:51]  Acc_iter 57350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:59:27,048   INFO  Train:  124/130 ( 95%) [ 327/464 ( 70%)]  Loss: 0.5414 (0.488)  LR: 4.799e-05  Time cost: 02:44/01:08 [1:35:09/24:25]  Acc_iter 57400       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:59:51,966   INFO  Train:  124/130 ( 95%) [ 377/464 ( 81%)]  Loss: 0.4299 (0.487)  LR: 4.637e-05  Time cost: 03:09/00:43 [1:35:34/23:58]  Acc_iter 57450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 10:59:52,338   INFO  kemove-Z790-D-DDR4          Fri Oct 20 10:59:52 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  68 % | 20727 / 24576 MB | kemove(18484M) root(173M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:00:17,304   INFO  Train:  124/130 ( 95%) [ 427/464 ( 92%)]  Loss: 0.4405 (0.486)  LR: 4.478e-05  Time cost: 03:34/00:18 [1:35:59/23:35]  Acc_iter 57500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:00:35,260   INFO  Train:  124/130 ( 95%) [ 463/464 (100%)]  Loss: 0.5197 (0.486)  LR: 4.365e-05  Time cost: 03:52/00:00 [1:36:17/23:16]  Acc_iter 57536       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:00:42,604   INFO  Train:  125/130 ( 96%) [   0/464 (  0%)]  Loss: 0.4454 (0.445)  LR: 4.362e-05  Time cost: 00:00/04:42 [1:36:24/28:17]  Acc_iter 57537       Data time: 0.09(0.09)  Forward time: 0.56(0.56)  Batch time: 0.65(0.65)
+2023-10-20 11:00:49,091   INFO  Train:  125/130 ( 96%) [  13/464 (  3%)]  Loss: 0.4966 (0.496)  LR: 4.321e-05  Time cost: 00:07/03:48 [1:36:31/23:24]  Acc_iter 57550       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.50(0.51)
+2023-10-20 11:01:14,030   INFO  Train:  125/130 ( 96%) [  63/464 ( 14%)]  Loss: 0.3937 (0.481)  LR: 4.168e-05  Time cost: 00:32/03:20 [1:36:56/22:42]  Acc_iter 57600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:01:14,404   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:01:14 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C, 100 % | 20729 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:01:39,311   INFO  Train:  125/130 ( 96%) [ 113/464 ( 24%)]  Loss: 0.4812 (0.484)  LR: 4.017e-05  Time cost: 00:57/02:56 [1:37:21/22:22]  Acc_iter 57650       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:02:04,283   INFO  Train:  125/130 ( 96%) [ 163/464 ( 35%)]  Loss: 0.4794 (0.485)  LR: 3.868e-05  Time cost: 01:22/02:31 [1:37:46/21:55]  Acc_iter 57700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:02:29,206   INFO  Train:  125/130 ( 96%) [ 213/464 ( 46%)]  Loss: 0.5138 (0.483)  LR: 3.723e-05  Time cost: 01:47/02:05 [1:38:11/21:28]  Acc_iter 57750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:02:29,574   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:02:29 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20729 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:02:54,514   INFO  Train:  125/130 ( 96%) [ 263/464 ( 57%)]  Loss: 0.4596 (0.483)  LR: 3.580e-05  Time cost: 02:12/01:40 [1:38:36/21:05]  Acc_iter 57800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:03:19,468   INFO  Train:  125/130 ( 96%) [ 313/464 ( 67%)]  Loss: 0.4469 (0.483)  LR: 3.440e-05  Time cost: 02:37/01:15 [1:39:01/20:39]  Acc_iter 57850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:03:44,441   INFO  Train:  125/130 ( 96%) [ 363/464 ( 78%)]  Loss: 0.4551 (0.483)  LR: 3.303e-05  Time cost: 03:02/00:50 [1:39:26/20:13]  Acc_iter 57900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:03:44,810   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:03:44 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  43 % | 20729 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:04:09,772   INFO  Train:  125/130 ( 96%) [ 413/464 ( 89%)]  Loss: 0.5017 (0.484)  LR: 3.169e-05  Time cost: 03:27/00:25 [1:39:52/19:49]  Acc_iter 57950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:04:34,742   INFO  Train:  125/130 ( 96%) [ 463/464 (100%)]  Loss: 0.5432 (0.484)  LR: 3.037e-05  Time cost: 03:52/00:00 [1:40:17/19:24]  Acc_iter 58000       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:04:42,064   INFO  Train:  126/130 ( 97%) [   0/464 (  0%)]  Loss: 0.4421 (0.442)  LR: 3.034e-05  Time cost: 00:00/04:46 [1:40:24/23:53]  Acc_iter 58001       Data time: 0.10(0.10)  Forward time: 0.52(0.52)  Batch time: 0.62(0.62)
+2023-10-20 11:05:06,500   INFO  Train:  126/130 ( 97%) [  49/464 ( 11%)]  Loss: 0.4981 (0.473)  LR: 2.908e-05  Time cost: 00:25/03:27 [1:40:48/18:57]  Acc_iter 58050       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:05:06,875   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:05:06 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 64°C,  85 % | 20729 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:05:31,744   INFO  Train:  126/130 ( 97%) [  99/464 ( 21%)]  Loss: 0.4486 (0.475)  LR: 2.782e-05  Time cost: 00:50/03:03 [1:41:14/18:37]  Acc_iter 58100       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 11:05:56,690   INFO  Train:  126/130 ( 97%) [ 149/464 ( 32%)]  Loss: 0.4977 (0.480)  LR: 2.659e-05  Time cost: 01:15/02:38 [1:41:38/18:09]  Acc_iter 58150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 11:06:21,649   INFO  Train:  126/130 ( 97%) [ 199/464 ( 43%)]  Loss: 0.5121 (0.478)  LR: 2.538e-05  Time cost: 01:40/02:12 [1:42:03/17:42]  Acc_iter 58200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:06:22,019   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:06:22 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 66°C,  72 % | 20729 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:06:46,956   INFO  Train:  126/130 ( 97%) [ 249/464 ( 54%)]  Loss: 0.4957 (0.478)  LR: 2.420e-05  Time cost: 02:05/01:47 [1:42:29/17:19]  Acc_iter 58250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:07:11,942   INFO  Train:  126/130 ( 97%) [ 299/464 ( 64%)]  Loss: 0.4893 (0.479)  LR: 2.305e-05  Time cost: 02:30/01:22 [1:42:54/16:53]  Acc_iter 58300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:07:36,877   INFO  Train:  126/130 ( 97%) [ 349/464 ( 75%)]  Loss: 0.4016 (0.480)  LR: 2.193e-05  Time cost: 02:55/00:57 [1:43:19/16:27]  Acc_iter 58350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:07:37,253   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:07:37 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  96 % | 20729 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:08:02,214   INFO  Train:  126/130 ( 97%) [ 399/464 ( 86%)]  Loss: 0.4990 (0.480)  LR: 2.084e-05  Time cost: 03:20/00:32 [1:43:44/16:04]  Acc_iter 58400       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 11:08:27,204   INFO  Train:  126/130 ( 97%) [ 449/464 ( 97%)]  Loss: 0.4659 (0.481)  LR: 1.977e-05  Time cost: 03:45/00:07 [1:44:09/15:38]  Acc_iter 58450       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:08:34,173   INFO  Train:  126/130 ( 97%) [ 463/464 (100%)]  Loss: 0.6029 (0.482)  LR: 1.948e-05  Time cost: 03:52/00:00 [1:44:16/15:31]  Acc_iter 58464       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:08:41,500   INFO  Train:  127/130 ( 98%) [   0/464 (  0%)]  Loss: 0.4807 (0.481)  LR: 1.945e-05  Time cost: 00:00/04:35 [1:44:23/18:22]  Acc_iter 58465       Data time: 0.08(0.08)  Forward time: 0.56(0.56)  Batch time: 0.65(0.65)
+2023-10-20 11:08:58,950   INFO  Train:  127/130 ( 98%) [  35/464 (  8%)]  Loss: 0.5132 (0.488)  LR: 1.873e-05  Time cost: 00:18/03:35 [1:44:41/15:12]  Acc_iter 58500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:08:59,320   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:08:59 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 63°C,  47 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 57°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:09:24,242   INFO  Train:  127/130 ( 98%) [  85/464 ( 18%)]  Loss: 0.4849 (0.486)  LR: 1.772e-05  Time cost: 00:43/03:10 [1:45:06/14:52]  Acc_iter 58550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:09:49,198   INFO  Train:  127/130 ( 98%) [ 135/464 ( 29%)]  Loss: 0.4829 (0.482)  LR: 1.674e-05  Time cost: 01:08/02:45 [1:45:31/14:24]  Acc_iter 58600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:10:14,135   INFO  Train:  127/130 ( 98%) [ 185/464 ( 40%)]  Loss: 0.4772 (0.482)  LR: 1.578e-05  Time cost: 01:33/02:19 [1:45:56/13:57]  Acc_iter 58650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:10:14,506   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:10:14 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  53 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:10:39,423   INFO  Train:  127/130 ( 98%) [ 235/464 ( 51%)]  Loss: 0.4818 (0.480)  LR: 1.485e-05  Time cost: 01:58/01:55 [1:46:21/13:34]  Acc_iter 58700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:11:04,379   INFO  Train:  127/130 ( 98%) [ 285/464 ( 61%)]  Loss: 0.4433 (0.480)  LR: 1.396e-05  Time cost: 02:23/01:29 [1:46:46/13:08]  Acc_iter 58750       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:11:29,361   INFO  Train:  127/130 ( 98%) [ 335/464 ( 72%)]  Loss: 0.5725 (0.480)  LR: 1.308e-05  Time cost: 02:48/01:04 [1:47:11/12:42]  Acc_iter 58800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:11:29,730   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:11:29 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  79 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:11:54,689   INFO  Train:  127/130 ( 98%) [ 385/464 ( 83%)]  Loss: 0.4450 (0.481)  LR: 1.224e-05  Time cost: 03:13/00:39 [1:47:36/12:18]  Acc_iter 58850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:12:19,649   INFO  Train:  127/130 ( 98%) [ 435/464 ( 94%)]  Loss: 0.4915 (0.481)  LR: 1.143e-05  Time cost: 03:38/00:14 [1:48:01/11:52]  Acc_iter 58900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:12:33,598   INFO  Train:  127/130 ( 98%) [ 463/464 (100%)]  Loss: 0.5584 (0.482)  LR: 1.098e-05  Time cost: 03:52/00:00 [1:48:15/11:38]  Acc_iter 58928       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 11:12:40,927   INFO  Train:  128/130 ( 98%) [   0/464 (  0%)]  Loss: 0.5067 (0.507)  LR: 1.097e-05  Time cost: 00:00/04:47 [1:48:23/14:23]  Acc_iter 58929       Data time: 0.11(0.11)  Forward time: 0.51(0.51)  Batch time: 0.62(0.62)
+2023-10-20 11:12:51,396   INFO  Train:  128/130 ( 98%) [  21/464 (  5%)]  Loss: 0.4350 (0.473)  LR: 1.064e-05  Time cost: 00:11/03:43 [1:48:33/11:31]  Acc_iter 58950       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:12:51,770   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:12:51 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 63°C, 100 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 56°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:13:16,659   INFO  Train:  128/130 ( 98%) [  71/464 ( 15%)]  Loss: 0.3943 (0.479)  LR: 9.881e-06  Time cost: 00:36/03:18 [1:48:58/11:06]  Acc_iter 59000       Data time: 0.00(0.01)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:13:41,592   INFO  Train:  128/130 ( 98%) [ 121/464 ( 26%)]  Loss: 0.5265 (0.487)  LR: 9.150e-06  Time cost: 01:01/02:52 [1:49:23/10:38]  Acc_iter 59050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:14:06,575   INFO  Train:  128/130 ( 98%) [ 171/464 ( 37%)]  Loss: 0.5408 (0.486)  LR: 8.447e-06  Time cost: 01:26/02:26 [1:49:48/10:12]  Acc_iter 59100       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:14:06,947   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:14:06 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:14:31,923   INFO  Train:  128/130 ( 98%) [ 221/464 ( 48%)]  Loss: 0.5097 (0.485)  LR: 7.772e-06  Time cost: 01:51/02:02 [1:50:14/09:48]  Acc_iter 59150       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.49(0.50)
+2023-10-20 11:14:56,877   INFO  Train:  128/130 ( 98%) [ 271/464 ( 58%)]  Loss: 0.5057 (0.483)  LR: 7.126e-06  Time cost: 02:16/01:36 [1:50:39/09:22]  Acc_iter 59200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:15:21,860   INFO  Train:  128/130 ( 98%) [ 321/464 ( 69%)]  Loss: 0.5233 (0.480)  LR: 6.507e-06  Time cost: 02:41/01:11 [1:51:04/08:57]  Acc_iter 59250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:15:22,231   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:15:22 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  70 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  98 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:15:47,187   INFO  Train:  128/130 ( 98%) [ 371/464 ( 80%)]  Loss: 0.4525 (0.480)  LR: 5.917e-06  Time cost: 03:06/00:46 [1:51:29/08:32]  Acc_iter 59300       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:16:12,147   INFO  Train:  128/130 ( 98%) [ 421/464 ( 91%)]  Loss: 0.4753 (0.480)  LR: 5.355e-06  Time cost: 03:31/00:21 [1:51:54/08:07]  Acc_iter 59350       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:16:33,074   INFO  Train:  128/130 ( 98%) [ 463/464 (100%)]  Loss: 0.4646 (0.480)  LR: 4.904e-06  Time cost: 03:52/00:00 [1:52:15/07:46]  Acc_iter 59392       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:16:40,426   INFO  Train:  129/130 ( 99%) [   0/464 (  0%)]  Loss: 0.5103 (0.510)  LR: 4.894e-06  Time cost: 00:00/04:40 [1:52:22/09:20]  Acc_iter 59393       Data time: 0.11(0.11)  Forward time: 0.56(0.56)  Batch time: 0.66(0.66)
+2023-10-20 11:16:43,919   INFO  Train:  129/130 ( 99%) [   7/464 (  2%)]  Loss: 0.4651 (0.493)  LR: 4.821e-06  Time cost: 00:04/03:54 [1:52:26/07:51]  Acc_iter 59400       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.49(0.52)
+2023-10-20 11:16:44,286   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:16:44 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 61°C, 100 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 55°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:17:09,208   INFO  Train:  129/130 ( 99%) [  57/464 ( 12%)]  Loss: 0.4272 (0.483)  LR: 4.315e-06  Time cost: 00:29/03:26 [1:52:51/07:21]  Acc_iter 59450       Data time: 0.00(0.01)  Forward time: 0.49(0.50)  Batch time: 0.49(0.51)
+2023-10-20 11:17:34,170   INFO  Train:  129/130 ( 99%) [ 107/464 ( 23%)]  Loss: 0.4364 (0.481)  LR: 3.837e-06  Time cost: 00:54/02:59 [1:53:16/06:53]  Acc_iter 59500       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:17:59,088   INFO  Train:  129/130 ( 99%) [ 157/464 ( 34%)]  Loss: 0.4844 (0.481)  LR: 3.388e-06  Time cost: 01:19/02:34 [1:53:41/06:26]  Acc_iter 59550       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:17:59,458   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:17:59 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:18:24,408   INFO  Train:  129/130 ( 99%) [ 207/464 ( 45%)]  Loss: 0.5342 (0.483)  LR: 2.967e-06  Time cost: 01:44/02:09 [1:54:06/06:02]  Acc_iter 59600       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:18:49,372   INFO  Train:  129/130 ( 99%) [ 257/464 ( 55%)]  Loss: 0.4669 (0.483)  LR: 2.574e-06  Time cost: 02:09/01:43 [1:54:31/05:36]  Acc_iter 59650       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:19:14,314   INFO  Train:  129/130 ( 99%) [ 307/464 ( 66%)]  Loss: 0.4240 (0.482)  LR: 2.209e-06  Time cost: 02:34/01:18 [1:54:56/05:11]  Acc_iter 59700       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:19:14,690   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:19:14 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  37 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 59°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:19:39,644   INFO  Train:  129/130 ( 99%) [ 357/464 ( 77%)]  Loss: 0.4709 (0.482)  LR: 1.872e-06  Time cost: 02:59/00:53 [1:55:21/04:46]  Acc_iter 59750       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:20:04,624   INFO  Train:  129/130 ( 99%) [ 407/464 ( 88%)]  Loss: 0.4267 (0.481)  LR: 1.564e-06  Time cost: 03:24/00:28 [1:55:46/04:21]  Acc_iter 59800       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:20:29,606   INFO  Train:  129/130 ( 99%) [ 457/464 ( 98%)]  Loss: 0.4869 (0.481)  LR: 1.283e-06  Time cost: 03:49/00:03 [1:56:11/03:56]  Acc_iter 59850       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:20:29,978   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:20:29 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  96 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:20:32,959   INFO  Train:  129/130 ( 99%) [ 463/464 (100%)]  Loss: 0.5018 (0.481)  LR: 1.252e-06  Time cost: 03:53/00:00 [1:56:15/03:53]  Acc_iter 59856       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:20:40,261   INFO  Train:  130/130 (100%) [   0/464 (  0%)]  Loss: 0.4615 (0.461)  LR: 1.246e-06  Time cost: 00:00/04:40 [1:56:22/04:40]  Acc_iter 59857       Data time: 0.09(0.09)  Forward time: 0.51(0.51)  Batch time: 0.60(0.60)
+2023-10-20 11:21:01,727   INFO  Train:  130/130 (100%) [  43/464 (  9%)]  Loss: 0.4270 (0.473)  LR: 1.031e-06  Time cost: 00:22/03:31 [1:56:44/03:31]  Acc_iter 59900       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:21:26,650   INFO  Train:  130/130 (100%) [  93/464 ( 20%)]  Loss: 0.4701 (0.471)  LR: 8.078e-07  Time cost: 00:46/03:05 [1:57:08/03:05]  Acc_iter 59950       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:21:51,618   INFO  Train:  130/130 (100%) [ 143/464 ( 31%)]  Loss: 0.4749 (0.473)  LR: 6.123e-07  Time cost: 01:11/02:40 [1:57:33/02:40]  Acc_iter 60000       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:21:51,990   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:21:51 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20717 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:22:16,903   INFO  Train:  130/130 (100%) [ 193/464 ( 42%)]  Loss: 0.4604 (0.476)  LR: 4.450e-07  Time cost: 01:37/02:15 [1:57:59/02:15]  Acc_iter 60050       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.50)
+2023-10-20 11:22:42,310   INFO  Train:  130/130 (100%) [ 243/464 ( 52%)]  Loss: 0.4927 (0.477)  LR: 3.060e-07  Time cost: 02:02/01:51 [1:58:24/01:51]  Acc_iter 60100       Data time: 0.00(0.00)  Forward time: 0.57(0.50)  Batch time: 0.57(0.50)
+2023-10-20 11:23:09,181   INFO  Train:  130/130 (100%) [ 293/464 ( 63%)]  Loss: 0.5241 (0.477)  LR: 1.952e-07  Time cost: 02:29/01:26 [1:58:51/01:26]  Acc_iter 60150       Data time: 0.00(0.00)  Forward time: 0.50(0.51)  Batch time: 0.50(0.51)
+2023-10-20 11:23:09,554   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:23:09 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C, 100 % | 20730 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C, 100 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:23:34,511   INFO  Train:  130/130 (100%) [ 343/464 ( 74%)]  Loss: 0.4657 (0.479)  LR: 1.127e-07  Time cost: 02:54/01:01 [1:59:16/01:01]  Acc_iter 60200       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 11:23:59,497   INFO  Train:  130/130 (100%) [ 393/464 ( 85%)]  Loss: 0.4347 (0.481)  LR: 5.849e-08  Time cost: 03:19/00:36 [1:59:41/00:36]  Acc_iter 60250       Data time: 0.00(0.00)  Forward time: 0.50(0.50)  Batch time: 0.50(0.51)
+2023-10-20 11:24:24,479   INFO  Train:  130/130 (100%) [ 443/464 ( 95%)]  Loss: 0.4996 (0.482)  LR: 3.249e-08  Time cost: 03:44/00:10 [2:00:06/00:10]  Acc_iter 60300       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.51)
+2023-10-20 11:24:24,850   INFO  kemove-Z790-D-DDR4          Fri Oct 20 11:24:24 2023  535.54.03
+[0] NVIDIA GeForce RTX 3090 | 65°C,  72 % | 20730 / 24576 MB | kemove(18484M) root(163M)
+[1] NVIDIA GeForce RTX 3090 | 58°C,  99 % | 18849 / 24576 MB | kemove(18832M) root(4M)
+
+2023-10-20 11:24:34,824   INFO  Train:  130/130 (100%) [ 463/464 (100%)]  Loss: 0.4842 (0.482)  LR: 3.001e-08  Time cost: 03:55/00:00 [2:00:17/00:00]  Acc_iter 60320       Data time: 0.00(0.00)  Forward time: 0.49(0.50)  Batch time: 0.50(0.51)
+2023-10-20 11:24:35,783   INFO  **********************End training kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat(default)**********************
+
+
+
+2023-10-20 11:24:35,783   INFO  **********************Start evaluation kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat(default)**********************
+2023-10-20 11:24:35,784   INFO  Loading KITTI dataset
+2023-10-20 11:24:35,836   INFO  Total samples for KITTI dataset: 3769
+2023-10-20 11:24:35,838   INFO  ==> Loading parameters from checkpoint /home/kemove/tem/OpenPCDet-master/output/kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat/default/ckpt/checkpoint_epoch_130.pth to CPU
+2023-10-20 11:24:35,866   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2023-10-20 11:24:35,891   INFO  ==> Done (loaded 548/548)
+2023-10-20 11:24:35,894   INFO  *************** EPOCH 130 EVALUATION *****************
+2023-10-20 11:25:53,049   INFO  *************** Performance of EPOCH 130 *****************
+2023-10-20 11:25:53,049   INFO  Generate label finished(sec_per_example: 0.0205 second).
+2023-10-20 11:25:53,049   INFO  recall_roi_0.3: 0.000000
+2023-10-20 11:25:53,049   INFO  recall_rcnn_0.3: 0.903517
+2023-10-20 11:25:53,049   INFO  recall_roi_0.5: 0.000000
+2023-10-20 11:25:53,049   INFO  recall_rcnn_0.5: 0.896844
+2023-10-20 11:25:53,049   INFO  recall_roi_0.7: 0.000000
+2023-10-20 11:25:53,049   INFO  recall_rcnn_0.7: 0.780203
+2023-10-20 11:25:53,050   INFO  Average predicted number of objects(3769 samples): 4.317
+2023-10-20 11:26:02,716   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.6374, 89.8988, 89.3123
+bev  AP:89.5717, 88.0856, 87.2997
+3d   AP:88.1293, 84.7780, 78.1181
+aos  AP:97.61, 89.82, 89.18
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7328, 95.4901, 92.8893
+bev  AP:92.7433, 91.2810, 88.8058
+3d   AP:90.8471, 84.6454, 82.1135
+aos  AP:98.71, 95.38, 92.72
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.6374, 89.8988, 89.3123
+bev  AP:97.7409, 89.9483, 89.4182
+3d   AP:97.7065, 89.9197, 89.3592
+aos  AP:97.61, 89.82, 89.18
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7328, 95.4901, 92.8893
+bev  AP:98.7940, 95.6191, 95.0906
+3d   AP:98.7264, 95.5503, 92.9504
+aos  AP:98.71, 95.38, 92.72
+
+2023-10-20 11:26:02,719   INFO  Result is saved to /home/kemove/tem/OpenPCDet-master/output/kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat/default/eval/eval_with_train/epoch_130/val
+2023-10-20 11:26:02,719   INFO  ****************Evaluation done.*****************
+2023-10-20 11:26:02,728   INFO  Epoch 130 has been evaluated
+2023-10-20 11:26:32,755   INFO  **********************End evaluation kitti_models/pointpillar_mobilenetv3_onecat_label_3swin_rdiou_3cat(default)**********************
